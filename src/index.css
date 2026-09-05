@@ -4,8 +4,8 @@
 
 @layer base {
   body {
-    background-color: #08110e;
-    color: #f1f5f9;
+    background-color: #0c2217;
+    color: #faf8f5;
   }
 }
 
@@ -13,23 +13,131 @@
   font-family: 'Noto Nastaliq Urdu', 'Amiri', 'Urdu Typesetting', serif;
 }
 
-/* Ambient dynamic background lighting */
-.bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(21, 161, 141, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(21, 161, 141, 0.05) 1px, transparent 1px);
+/* Keyframe animations matching the main platform hero section */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-24px) rotate(4deg) scale(1.04);
+  }
 }
 
-.glow-teal {
-  box-shadow: 0 0 50px -10px rgba(21, 161, 141, 0.35);
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(22px) rotate(-5deg) scale(0.96);
+  }
 }
 
+@keyframes auroraWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinSlowReverse {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes particleDrift {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.45;
+  }
+  35% {
+    transform: translateY(-28px) translateX(14px) scale(1.35);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-56px) translateX(-12px) scale(0.95);
+    opacity: 0.65;
+  }
+}
+
+@keyframes geometricPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.04);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 9s ease-in-out infinite;
+}
+
+.animate-aurora {
+  background-size: 200% 200%;
+  animation: auroraWave 12s ease infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 30s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spinSlowReverse 35s linear infinite;
+}
+
+.animate-particle-drift {
+  animation: particleDrift 9s ease-in-out infinite;
+}
+
+.animate-geometric-pulse {
+  animation: geometricPulse 10s ease-in-out infinite;
+}
+
+/* Glassmorphic and ambient styling */
 .glass-card {
-  background: rgba(15, 27, 23, 0.7);
+  background: rgba(12, 34, 23, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(21, 161, 141, 0.18);
+  border: 1px solid rgba(212, 163, 89, 0.22);
 }
 
 .glass-card-hover {
@@ -37,10 +145,14 @@
 }
 
 .glass-card-hover:hover {
-  background: rgba(21, 38, 33, 0.85);
-  border-color: rgba(21, 161, 141, 0.45);
+  background: rgba(18, 50, 34, 0.88);
+  border-color: rgba(212, 163, 89, 0.5);
   transform: translateY(-3px);
-  box-shadow: 0 16px 35px -10px rgba(21, 161, 141, 0.2);
+  box-shadow: 0 16px 35px -10px rgba(212, 163, 89, 0.2);
+}
+
+.glow-gold {
+  box-shadow: 0 0 50px -10px rgba(212, 163, 89, 0.3);
 }
 
 /* Custom scrollbar */
@@ -48,12 +160,12 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #08110e;
+  background: #07150e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #15a18d;
+  background: #d4a359;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #18b8a2;
+  background: #f59e0b;
 }
