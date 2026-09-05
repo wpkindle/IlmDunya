@@ -8,7 +8,9 @@ import {
   MessageCircle,
   MapPin,
   ChevronRight,
-  Heart
+  Heart,
+  Handshake,
+  Award
 } from 'lucide-react';
 import AnimatedHeroBackground from './components/AnimatedHeroBackground';
 import BrandLogo from './components/BrandLogo';
@@ -118,9 +120,25 @@ export default function App() {
         </h1>
 
         {/* Subtitle Description */}
-        <p className="text-xs sm:text-base md:text-lg text-stone-300 max-w-2xl font-normal leading-relaxed mb-8 sm:mb-12 px-2">
-          We are crafting a verified, safe, and privacy-first digital academy connecting Pakistani students and families <strong className="text-[#d4a359]">across Pakistan</strong> with certified Qaris, Alimahs, and Cambridge &amp; Board-certified subject educators.
+        <p className="text-xs sm:text-base md:text-lg text-stone-300 max-w-2xl font-normal leading-relaxed mb-5 sm:mb-7 px-2">
+          Connecting students and families across Pakistan directly with certified Qaris, Alimahs, and Cambridge &amp; Board-certified educators — featuring <strong className="text-[#10b981]">direct dealing with no third-party involvement</strong>, <strong className="text-[#d4a359]">guaranteed female safety</strong>, and <strong className="text-[#fbbf24]">official course certificates</strong>.
         </p>
+
+        {/* 3 Core Trust Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 max-w-3xl px-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-[10px] sm:text-xs font-bold text-emerald-300 shadow-sm backdrop-blur-sm">
+            <Handshake className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <span>Direct Dealing • No 3rd Party</span>
+          </div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-950/50 border border-rose-400/40 text-[10px] sm:text-xs font-bold text-rose-200 shadow-sm backdrop-blur-sm">
+            <ShieldCheck className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <span>100% Female Safety &amp; Privacy</span>
+          </div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-950/60 border border-amber-400/40 text-[10px] sm:text-xs font-bold text-amber-200 shadow-sm backdrop-blur-sm">
+            <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>Official Certificates Provided</span>
+          </div>
+        </div>
 
         {/* LIVE REAL-TIME COUNTDOWN CARDS (100% Mobile Fluid & Never Overflowing) */}
         <div className="w-full max-w-[320px] sm:max-w-2xl mx-auto mb-10 sm:mb-14">
@@ -174,29 +192,83 @@ export default function App() {
           </button>
         </div>
 
-        {/* 4 CORE VALUE PILLARS */}
+        {/* 6 CORE VALUE PILLARS */}
         <div className="w-full text-left mb-14 sm:mb-20">
           <div className="text-center mb-8 sm:mb-10">
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-2 sm:mb-3">
               Why IlmiDunya Will Be Different
             </h2>
             <p className="text-xs sm:text-base text-stone-400 max-w-xl mx-auto px-2">
-              Built specifically for Pakistani students, parents, and dedicated educators with world-class standards.
+              Direct connection, guaranteed female safety, and official certificates — built specifically for Pakistani families and dedicated educators.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
-            {/* Pillar 1 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
+            {/* Pillar 1: Direct Dealing (No 3rd Party) */}
+            <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-emerald-500/30 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-3 sm:mb-4">
+                  <Handshake className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
+                  Direct Dealing (No 3rd Party)
+                </h4>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
+                  Direct communication, custom scheduling, and fee arrangements directly between tutor and student. Zero middleman cuts, no third-party agency deductions, and complete mutual transparency.
+                </p>
+              </div>
+              <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+                Zero Commission Traps <ChevronRight className="w-3 h-3" />
+              </div>
+            </div>
+
+            {/* Pillar 2: 100% Female Safety & Privacy */}
+            <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-rose-500/30 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 mb-3 sm:mb-4">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
+                  100% Female Safety &amp; Privacy
+                </h4>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
+                  Verified female Alimahs and certified female educators exclusively for sisters &amp; daughters. Camera-off privacy mode, zero tolerance for harassment, and full family peace of mind.
+                </p>
+              </div>
+              <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-rose-400 flex items-center gap-1">
+                Strict Family Safeguarding <ChevronRight className="w-3 h-3" />
+              </div>
+            </div>
+
+            {/* Pillar 3: Official Course Certificates */}
+            <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-amber-500/30 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-3 sm:mb-4">
+                  <Award className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
+                  Official Certificates Provided
+                </h4>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
+                  Receive verifiable digital completion certificates and Sanad credentials upon completing your Quran, Tajweed, or academic courses to celebrate and prove your milestones.
+                </p>
+              </div>
+              <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-amber-400 flex items-center gap-1">
+                Verifiable Credentials <ChevronRight className="w-3 h-3" />
+              </div>
+            </div>
+
+            {/* Pillar 4: Verified Quran & Tajweed */}
             <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-[#d4a359]/25 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#d4a359]/20 border border-[#d4a359]/40 flex items-center justify-center text-[#d4a359] mb-3 sm:mb-4">
                   <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
-                  Verified Quran &amp; Tajweed
+                  Sanad-Certified Quran &amp; Tajweed
                 </h4>
                 <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
-                  Sanad-certified Qaris, Hafiz mentors, and female Alimahs for sisters &amp; daughters with camera-off privacy mode.
+                  Sanad-certified Qaris, Hafiz mentors, and Alimahs with verified Ijazaat connected to unbroken chains of recitation for Noorani Qaida, Nazra Quran, and Hifz.
                 </p>
               </div>
               <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-[#d4a359] flex items-center gap-1">
@@ -204,7 +276,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Pillar 2 */}
+            {/* Pillar 5: Cambridge & Board Experts */}
             <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-[#b85d34]/25 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#b85d34]/20 border border-[#b85d34]/40 flex items-center justify-center text-[#e07a4a] mb-3 sm:mb-4">
@@ -214,7 +286,7 @@ export default function App() {
                   Cambridge &amp; Board Experts
                 </h4>
                 <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
-                  Cambridge O/A Levels, Matric, FSc, MDCAT, ECAT subject mentors from top institutions (FAST, NUST, LUMS, AKU).
+                  Cambridge O/A Levels, Matric, FSc, MDCAT, ECAT subject mentors from top institutions (FAST, NUST, LUMS, AKU) delivering customized exam preparation.
                 </p>
               </div>
               <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-[#e07a4a] flex items-center gap-1">
@@ -222,39 +294,21 @@ export default function App() {
               </div>
             </div>
 
-            {/* Pillar 3 */}
-            <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-[#d4a359]/25 flex flex-col justify-between">
+            {/* Pillar 6: 1-on-1 Interactive Classroom */}
+            <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-[#fbbf24]/25 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#d4a359]/20 border border-[#d4a359]/40 flex items-center justify-center text-[#fbbf24] mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#fbbf24]/20 border border-[#fbbf24]/40 flex items-center justify-center text-[#fbbf24] mb-3 sm:mb-4">
                   <Video className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
                   1-on-1 Interactive Classroom
                 </h4>
                 <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
-                  In-platform WebRTC HD video, digital interactive whiteboard, screen sharing, and Mushaf Quran viewer with Tajweed rules.
+                  In-platform WebRTC HD video, digital interactive whiteboard, screen sharing, and Mushaf Quran viewer with Tajweed rules. Zero Zoom or 3rd party setup.
                 </p>
               </div>
               <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-[#fbbf24] flex items-center gap-1">
                 Zero Zoom Setup <ChevronRight className="w-3 h-3" />
-              </div>
-            </div>
-
-            {/* Pillar 4 */}
-            <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-[#b85d34]/25 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#b85d34]/20 border border-[#b85d34]/40 flex items-center justify-center text-[#d4a359] mb-3 sm:mb-4">
-                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
-                  Fair Local Pricing
-                </h4>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
-                  Support for JazzCash, EasyPaisa &amp; Pakistani online bank transfers. Zero commission traps and protected deal escrow.
-                </p>
-              </div>
-              <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-[#d4a359] flex items-center gap-1">
-                Direct Pakistani PKR <ChevronRight className="w-3 h-3" />
               </div>
             </div>
           </div>
@@ -329,9 +383,9 @@ export default function App() {
           </div>
 
           {/* Mission & Trust Tagline */}
-          <p className="text-stone-300 text-xs sm:text-sm max-w-lg font-normal leading-relaxed">
-            Pakistan's Premier 1-on-1 Quran &amp; Academic Learning Platform.
-            <span className="hidden sm:inline text-stone-400"> Verified Qaris, Alimahs &amp; Subject Tutors.</span>
+          <p className="text-stone-300 text-xs sm:text-sm max-w-xl font-normal leading-relaxed">
+            Pakistan's Premier 1-on-1 Quran &amp; Academic Platform.
+            <span className="block sm:inline text-stone-400"> Direct Dealing (No 3rd Party) • 100% Female Safety • Official Certificates.</span>
           </p>
 
           {/* Copyright & Safe Zone Clearance */}
