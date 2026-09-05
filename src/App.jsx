@@ -25,13 +25,27 @@ import BrandLogo from './components/BrandLogo';
 import SupportPlatformModal from './components/SupportPlatformModal';
 
 export default function App() {
-  // Countdown Timer State (Target: 28 days from now)
-  const [timeLeft, setTimeLeft] = useState({
-    days: 28,
-    hours: 14,
-    minutes: 42,
-    seconds: 19
-  });
+  // Target Launch Date: 11 days countdown (September 16, 2026 at 23:59:59 PKT)
+  const calculateTimeLeft = () => {
+    // 11 days from current reference date
+    const targetDate = new Date('2026-09-16T23:59:59+05:00').getTime();
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((difference % 1000) / 1000)
+    };
+  };
+
+  // Countdown Timer State (Target: 11 days)
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
 
   // Waitlist Form State
   const [role, setRole] = useState('student'); // 'student' | 'tutor'
@@ -52,26 +66,11 @@ export default function App() {
     }
   }, []);
 
-  // Live real-time countdown timer
+  // Live real-time countdown timer ticking every second
   useEffect(() => {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 28);
-    targetDate.setHours(targetDate.getHours() + 14);
-
+    setTimeLeft(calculateTimeLeft());
     const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = targetDate.getTime() - now;
-
-      if (difference <= 0) {
-        clearInterval(timer);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        setTimeLeft({ days, hours, minutes, seconds });
-      }
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
