@@ -54,9 +54,10 @@ export default function AnimatedHeroBackground() {
       ref={containerRef}
       style={{
         '--mouse-x': '50%',
-        '--mouse-y': '38%'
+        '--mouse-y': '38%',
+        contain: 'paint'
       }}
-      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none"
+      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none max-w-full"
       aria-hidden="true"
     >
       {/* 1. Deep Editorial Base Tones */}
@@ -76,13 +77,13 @@ export default function AnimatedHeroBackground() {
         }}
       />
 
-      {/* 4. Pulsing Atmospheric Ambient Orbs */}
-      <div className="absolute -top-24 -left-20 w-[600px] h-[600px] bg-[#1e543c]/40 rounded-full blur-[110px] animate-pulse-glow" />
-      <div className="absolute top-1/4 -right-28 w-[650px] h-[650px] bg-[#d4a359]/25 rounded-full blur-[120px] animate-float-reverse" />
-      <div className="absolute -bottom-24 left-1/3 w-[680px] h-[520px] bg-[#b85d34]/20 rounded-full blur-[110px] animate-float-slow" />
+      {/* 4. Pulsing Atmospheric Ambient Orbs (Responsive Mobile Scaling) */}
+      <div className="absolute -top-16 -left-16 w-[320px] h-[320px] sm:w-[600px] sm:h-[600px] bg-[#1e543c]/40 rounded-full blur-[90px] sm:blur-[110px] animate-pulse-glow" />
+      <div className="absolute top-1/4 -right-16 w-[340px] h-[340px] sm:w-[650px] sm:h-[650px] bg-[#d4a359]/25 rounded-full blur-[100px] sm:blur-[120px] animate-float-reverse" />
+      <div className="absolute -bottom-16 left-1/4 w-[360px] h-[300px] sm:w-[680px] sm:h-[520px] bg-[#b85d34]/20 rounded-full blur-[90px] sm:blur-[110px] animate-float-slow" />
 
-      {/* 5. Sacred Islamic Geometric Wireframe (Top-Right Astrolabe & Rub el Hizb - Mobile Optimized) */}
-      <div className="absolute -top-16 -right-16 sm:-top-24 sm:right-4 lg:right-8 w-[320px] h-[320px] sm:w-[700px] sm:h-[700px] pointer-events-none opacity-25 sm:opacity-85 animate-spin-slow">
+      {/* 5. Sacred Islamic Geometric Wireframe (Top-Right Astrolabe - Mobile Clamped) */}
+      <div className="absolute -top-12 -right-12 sm:-top-24 sm:right-4 lg:right-8 w-[240px] h-[240px] sm:w-[700px] sm:h-[700px] pointer-events-none opacity-20 sm:opacity-85 animate-spin-slow overflow-hidden">
         <svg
           viewBox="0 0 400 400"
           className="w-full h-full drop-shadow-[0_0_12px_rgba(212,163,89,0.35)]"
@@ -158,8 +159,8 @@ export default function AnimatedHeroBackground() {
         </svg>
       </div>
 
-      {/* 6. Sacred Islamic Geometric Wireframe (Bottom-Left Counter-Rotating Motif - Mobile Optimized) */}
-      <div className="absolute -bottom-24 -left-16 sm:-bottom-36 sm:-left-16 w-[280px] h-[280px] sm:w-[580px] sm:h-[580px] pointer-events-none opacity-20 sm:opacity-75 animate-spin-reverse">
+      {/* 6. Sacred Islamic Geometric Wireframe (Bottom-Left - Mobile Clamped) */}
+      <div className="absolute -bottom-16 -left-12 sm:-bottom-36 sm:-left-16 w-[200px] h-[200px] sm:w-[580px] sm:h-[580px] pointer-events-none opacity-15 sm:opacity-75 animate-spin-reverse overflow-hidden">
         <svg
           viewBox="0 0 400 400"
           className="w-full h-full drop-shadow-[0_0_12px_rgba(212,163,89,0.3)]"

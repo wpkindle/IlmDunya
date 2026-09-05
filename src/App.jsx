@@ -101,12 +101,12 @@ export default function App() {
   const whatsappUrl = "https://wa.me/923171759093?text=Salam%20IlmiDunya!%20I%20am%20interested%20in%20early%20access.";
 
   return (
-    <div className="relative min-h-screen bg-[#0c2217] text-[#faf8f5] overflow-x-hidden flex flex-col justify-between">
+    <div className="relative min-h-screen bg-[#0c2217] text-[#faf8f5] overflow-x-hidden w-full max-w-full flex flex-col justify-between">
       {/* 1. EXACT ANIMATED HERO BACKGROUND EFFECT FROM MAIN WEBSITE */}
       <AnimatedHeroBackground />
 
       {/* Top Header Navigation (Mobile Optimized) */}
-      <header className="relative z-20 w-full border-b border-[#d4a359]/20 bg-[#07150e]/90 backdrop-blur-md">
+      <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/20 bg-[#07150e]/90 backdrop-blur-md overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
           {/* Authentic Brand Logo */}
           <a href="/" className="flex items-center group py-1 shrink-0" title="IlmiDunya Pakistan">
@@ -134,14 +134,14 @@ export default function App() {
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-100" />
               <span className="hidden sm:inline">WhatsApp: +92 317 1759093</span>
-              <span className="sm:hidden font-bold">WhatsApp</span>
+              <span className="sm:hidden font-bold">Contact</span>
             </a>
           </div>
         </div>
       </header>
 
-      {/* Main Center Stage (Mobile-Responsive Spacing) */}
-      <main className="relative z-10 flex-1 max-w-5xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-8 pb-28 sm:pt-14 sm:pb-20 flex flex-col items-center text-center">
+      {/* Main Center Stage (Mobile-Responsive Spacing & Zero Overflow) */}
+      <main className="relative z-10 flex-1 w-full max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 pt-8 pb-28 sm:pt-14 sm:pb-20 flex flex-col items-center text-center overflow-x-hidden box-border">
         {/* Sacred Bismillah Calligraphic Motif */}
         <div className="inline-flex items-center justify-center mb-4 sm:mb-6">
           <span className="font-urdu text-sm sm:text-xl text-[#d4a359] tracking-widest drop-shadow-[0_2px_8px_rgba(212,163,89,0.3)]" dir="rtl">
@@ -150,15 +150,15 @@ export default function App() {
         </div>
 
         {/* Coming Soon Pill Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full glass-card border-[#d4a359]/40 mb-5 sm:mb-8 animate-pulse-glow max-w-full">
+        <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-full glass-card border-[#d4a359]/40 mb-5 sm:mb-8 animate-pulse-glow max-w-[92vw]">
           <Sparkles className="w-3.5 h-3.5 text-[#fbbf24] shrink-0" />
-          <span className="text-[11px] sm:text-sm font-bold text-stone-200 tracking-wide truncate">
+          <span className="text-[10px] sm:text-sm font-bold text-stone-200 tracking-wide text-center">
             Pakistan's Premier 1-on-1 Quran &amp; Academic Platform
           </span>
         </div>
 
         {/* Main Title Heading */}
-        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight sm:leading-[1.12] mb-3 sm:mb-6 px-1">
+        <h1 className="text-2xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight sm:leading-[1.12] mb-3 sm:mb-6 px-1">
           Empowering Minds,{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fde047] via-[#d4a359] to-[#b85d34] block sm:inline">
             Inspiring Souls.
@@ -170,24 +170,27 @@ export default function App() {
           We are crafting a verified, safe, and privacy-first digital academy connecting Pakistani students and families <strong className="text-[#d4a359]">across Pakistan</strong> with certified Qaris, Alimahs, and Cambridge &amp; Board-certified subject educators.
         </p>
 
-        {/* LIVE REAL-TIME COUNTDOWN CARDS */}
-        <div className="w-full max-w-xs sm:max-w-2xl mb-10 sm:mb-14">
-          <div className="grid grid-cols-4 gap-2 sm:gap-6">
+        {/* LIVE REAL-TIME COUNTDOWN CARDS (100% Mobile Fluid & Never Overflowing) */}
+        <div className="w-full max-w-[320px] sm:max-w-2xl mx-auto mb-10 sm:mb-14">
+          <div className="grid grid-cols-4 gap-1.5 sm:gap-6 w-full">
             {[
               { label: 'DAYS', value: timeLeft.days },
               { label: 'HOURS', value: timeLeft.hours },
-              { label: 'MINUTES', value: timeLeft.minutes },
-              { label: 'SECONDS', value: timeLeft.seconds }
+              { label: 'MINS', value: timeLeft.minutes },
+              { label: 'SECS', value: timeLeft.seconds }
             ].map((unit, index) => (
               <div
                 key={index}
-                className="glass-card rounded-xl sm:rounded-2xl p-2 sm:p-5 flex flex-col items-center justify-center border border-[#d4a359]/30 glow-gold group hover:border-[#d4a359]/70 transition-all duration-300"
+                className="glass-card rounded-xl sm:rounded-2xl p-2 sm:p-5 flex flex-col items-center justify-center border border-[#d4a359]/30 glow-gold group hover:border-[#d4a359]/70 transition-all duration-300 min-w-0"
               >
-                <div className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight tabular-nums group-hover:text-[#d4a359] transition-colors">
+                <div className="text-xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight tabular-nums group-hover:text-[#d4a359] transition-colors">
                   {String(unit.value).padStart(2, '0')}
                 </div>
-                <div className="text-[8.5px] sm:text-xs font-bold text-stone-400 tracking-wider mt-0.5 sm:mt-1.5 uppercase">
-                  {unit.label}
+                <div className="text-[8px] sm:text-xs font-bold text-stone-400 tracking-wider mt-0.5 sm:mt-1.5 uppercase truncate w-full text-center">
+                  <span className="sm:hidden">{unit.label}</span>
+                  <span className="hidden sm:inline">
+                    {unit.label === 'MINS' ? 'MINUTES' : unit.label === 'SECS' ? 'SECONDS' : unit.label}
+                  </span>
                 </div>
               </div>
             ))}
@@ -195,52 +198,52 @@ export default function App() {
         </div>
 
         {/* VIP WAITLIST REGISTRATION CARD */}
-        <div className="w-full max-w-xl glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-[#d4a359]/35 shadow-2xl relative mb-14 sm:mb-20">
+        <div className="w-full max-w-xl glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border-[#d4a359]/35 shadow-2xl relative mb-14 sm:mb-20 box-border overflow-hidden">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-white shadow-md">
             ⭐ Early Bird VIP Access
           </div>
 
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="mt-2 space-y-3.5 sm:space-y-4 text-left">
-              <div className="text-center mb-4 sm:mb-5">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+            <form onSubmit={handleSubmit} className="mt-2 space-y-3 sm:space-y-4 text-left w-full">
+              <div className="text-center mb-3 sm:mb-5">
+                <h3 className="text-base sm:text-xl font-bold text-white mb-1">
                   Join the Exclusive Waitlist
                 </h3>
-                <p className="text-[11px] sm:text-sm text-stone-300">
+                <p className="text-[11px] sm:text-sm text-stone-300 leading-normal px-1">
                   Claim <span className="text-[#d4a359] font-bold">2 Free Trial Classes</span> + verified tutor priority when we launch.
                 </p>
               </div>
 
               {/* Role Toggle Tabs */}
-              <div className="grid grid-cols-2 gap-1.5 p-1 bg-black/40 rounded-xl border border-white/5">
+              <div className="grid grid-cols-2 gap-1.5 p-1 bg-black/40 rounded-xl border border-white/5 w-full">
                 <button
                   type="button"
                   onClick={() => setRole('student')}
-                  className={`py-2 px-2 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  className={`py-2 px-1.5 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer truncate ${
                     role === 'student'
                       ? 'bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-white shadow-md'
                       : 'text-stone-400 hover:text-white'
                   }`}
                 >
-                  <BookOpen className="w-3.5 h-3.5" />
-                  I'm a Student
+                  <BookOpen className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">I'm a Student</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setRole('tutor')}
-                  className={`py-2 px-2 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                  className={`py-2 px-1.5 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer truncate ${
                     role === 'tutor'
                       ? 'bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-white shadow-md'
                       : 'text-stone-400 hover:text-white'
                   }`}
                 >
-                  <GraduationCap className="w-3.5 h-3.5" />
-                  I'm a Tutor
+                  <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">I'm a Tutor</span>
                 </button>
               </div>
 
               {/* Name Field */}
-              <div>
+              <div className="w-full">
                 <label className="block text-[11px] sm:text-xs font-semibold text-stone-300 mb-1">
                   Your Full Name
                 </label>
@@ -250,30 +253,30 @@ export default function App() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Muhammad Bilal / Fatima Zahra"
-                  className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all"
+                  className="w-full max-w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all box-border"
                 />
               </div>
 
               {/* WhatsApp Number Field */}
-              <div>
+              <div className="w-full">
                 <label className="block text-[11px] sm:text-xs font-semibold text-stone-300 mb-1">
                   WhatsApp Number
                 </label>
-                <div className="relative">
-                  <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#d4a359]" />
+                <div className="relative w-full">
+                  <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#d4a359]" />
                   <input
                     type="tel"
                     required
                     value={whatsappNumber}
                     onChange={(e) => setWhatsappNumber(e.target.value)}
                     placeholder="e.g. +92 317 1759093"
-                    className="w-full pl-10 pr-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all"
+                    className="w-full max-w-full pl-9 pr-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all box-border"
                   />
                 </div>
               </div>
 
               {/* Subject Field */}
-              <div>
+              <div className="w-full">
                 <label className="block text-[11px] sm:text-xs font-semibold text-stone-300 mb-1">
                   {role === 'student' ? 'Subject / Quran Course Needed' : 'Subjects / Courses You Teach'}
                 </label>
@@ -283,10 +286,10 @@ export default function App() {
                   onChange={(e) => setSubjectInterest(e.target.value)}
                   placeholder={
                     role === 'student'
-                      ? 'e.g. Tajweed & Quran Hifz, O-Level Math, Matric Physics...'
-                      : 'e.g. Alimah Quran Teacher, Cambridge O/A Levels, Chemistry...'
+                      ? 'e.g. Tajweed, Quran Hifz, Math...'
+                      : 'e.g. Alimah, O-Level, Chemistry...'
                   }
-                  className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all"
+                  className="w-full max-w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all box-border"
                 />
               </div>
 
@@ -294,7 +297,7 @@ export default function App() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-1.5 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] hover:from-[#f59e0b] hover:to-[#b85d34] text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-[#b85d34]/30 hover:shadow-[#d4a359]/40 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-60"
+                className="w-full max-w-full mt-1.5 py-3 sm:py-3.5 px-3 sm:px-6 rounded-xl bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] hover:from-[#f59e0b] hover:to-[#b85d34] text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-[#b85d34]/30 hover:shadow-[#d4a359]/40 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 group cursor-pointer disabled:opacity-60 box-border text-center"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -303,16 +306,19 @@ export default function App() {
                   </span>
                 ) : (
                   <>
-                    <Bell className="w-3.5 h-3.5 text-amber-200 group-hover:rotate-12 transition-transform" />
-                    <span>Get VIP Early Access &amp; 2 Free Trial Classes</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <Bell className="w-3.5 h-3.5 text-amber-200 shrink-0 group-hover:rotate-12 transition-transform" />
+                    <span className="leading-tight text-center">
+                      <span className="sm:hidden">Get VIP Early Access (2 Free Classes)</span>
+                      <span className="hidden sm:inline">Get VIP Early Access &amp; 2 Free Trial Classes</span>
+                    </span>
+                    <ArrowRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
               </button>
 
-              <div className="flex items-center justify-center gap-2 text-[10px] sm:text-[11px] text-stone-400 pt-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#d4a359]" />
-                <span>100% Privacy Protected • Direct WhatsApp Notification</span>
+              <div className="flex items-center justify-center gap-1.5 flex-wrap text-[10px] sm:text-[11px] text-stone-400 pt-1 text-center">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#d4a359] shrink-0" />
+                <span>100% Privacy Protected • WhatsApp Notification</span>
               </div>
             </form>
           ) : (
@@ -472,7 +478,8 @@ export default function App() {
           <div className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0" />
           <MessageCircle className="w-3.5 h-3.5 text-white shrink-0" />
           <span className="text-[11px] sm:text-xs font-extrabold tracking-tight">
-            <span className="hidden sm:inline">Contact: </span>+92 317 1759093
+            <span className="sm:hidden">Contact</span>
+            <span className="hidden sm:inline">Contact: +92 317 1759093</span>
           </span>
         </a>
       </div>
