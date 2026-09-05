@@ -460,19 +460,19 @@ export default function App() {
         </button>
       </div>
 
-      {/* 2. Floating WhatsApp Direct Support Button (Bottom Right) */}
+      {/* 2. Floating WhatsApp Direct Contact Button (Bottom Right) */}
       <div className="fixed bottom-4 sm:bottom-5 right-3 sm:right-6 z-40">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Contact WhatsApp Support"
+          aria-label="Contact WhatsApp"
           className="flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full shadow-xl bg-gradient-to-r from-[#10b981] to-[#059669] hover:from-[#059669] hover:to-[#047857] text-white hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-xl cursor-pointer border border-emerald-300/40"
         >
           <div className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0" />
           <MessageCircle className="w-3.5 h-3.5 text-white shrink-0" />
           <span className="text-[11px] sm:text-xs font-extrabold tracking-tight">
-            <span className="hidden sm:inline">Support: </span>+92 317 1759093
+            <span className="hidden sm:inline">Contact: </span>+92 317 1759093
           </span>
         </a>
       </div>
