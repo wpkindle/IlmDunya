@@ -16,10 +16,14 @@ import {
   Award,
   ChevronRight,
   Star,
-  Phone
+  Phone,
+  Heart,
+  QrCode,
+  HelpCircle
 } from 'lucide-react';
 import AnimatedHeroBackground from './components/AnimatedHeroBackground';
 import BrandLogo from './components/BrandLogo';
+import SupportPlatformModal from './components/SupportPlatformModal';
 
 export default function App() {
   // Countdown Timer State (Target: 28 days from now)
@@ -37,6 +41,9 @@ export default function App() {
   const [subjectInterest, setSubjectInterest] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Support Modal State
+  const [supportModalOpen, setSupportModalOpen] = useState(false);
 
   // Check local storage for previous registration
   useEffect(() => {
@@ -103,25 +110,33 @@ export default function App() {
       {/* Top Header Navigation */}
       <header className="relative z-20 w-full border-b border-[#d4a359]/20 bg-[#07150e]/85 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Authentic Brand Logo (No Extra Greenish Text) */}
+          {/* Authentic Brand Logo */}
           <a href="/" className="flex items-center group py-1" title="IlmiDunya Pakistan">
             <BrandLogo variant="dark" size="md" withBadge={true} />
           </a>
 
-          {/* WhatsApp Direct Contact Button */}
-          <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#d4a359]/15 border border-[#d4a359]/30 text-xs font-semibold text-[#d4a359]">
-              <span className="w-2 h-2 rounded-full bg-[#f59e0b] animate-ping" />
-              Launching Fall 2026
-            </span>
+          {/* Action Buttons: Support Platform & WhatsApp Contact */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Support Platform Button */}
+            <button
+              onClick={() => setSupportModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#0c2217] hover:bg-[#143d2b] border border-[#d4a359]/40 hover:border-[#d4a359] text-xs font-bold text-[#d4a359] transition-all cursor-pointer shadow-sm"
+              title="Support Platform Development"
+            >
+              <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/20" />
+              <span>Support Us</span>
+            </button>
+
+            {/* WhatsApp Contact Button */}
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#b85d34] to-[#9e4e2a] hover:from-[#d4a359] hover:to-[#b85d34] text-white text-xs font-extrabold shadow-md transition-all duration-300"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#b85d34] to-[#9e4e2a] hover:from-[#d4a359] hover:to-[#b85d34] text-white text-xs font-extrabold shadow-md transition-all duration-300"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-100" />
-              <span>WhatsApp Us: +92 317 1759093</span>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-100" />
+              <span className="hidden sm:inline">WhatsApp:</span>
+              <span>+92 317 1759093</span>
             </a>
           </div>
         </div>
@@ -181,7 +196,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* VIP WAITLIST REGISTRATION CARD (NO EMAIL FIELD) */}
+        {/* VIP WAITLIST REGISTRATION CARD */}
         <div className="w-full max-w-xl glass-card rounded-3xl p-6 sm:p-8 border-[#d4a359]/35 shadow-2xl relative mb-20">
           <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-[11px] font-extrabold uppercase tracking-widest text-white shadow-md">
             ⭐ Early Bird VIP Access
@@ -241,7 +256,7 @@ export default function App() {
                 />
               </div>
 
-              {/* WhatsApp Number Field (Email Removed) */}
+              {/* WhatsApp Number Field */}
               <div>
                 <label className="block text-xs font-semibold text-stone-300 mb-1">
                   WhatsApp Number
@@ -437,7 +452,43 @@ export default function App() {
         </div>
       </main>
 
-      {/* Footer (No Email) */}
+      {/* FLOATING ACTION BUTTONS */}
+      {/* 1. Floating Support Platform Button (Bottom Left) */}
+      <div className="fixed bottom-5 left-4 sm:left-6 z-40">
+        <button
+          onClick={() => setSupportModalOpen(true)}
+          aria-label="Support IlmiDunya Platform"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full shadow-[0_8px_30px_rgba(12,34,23,0.7)] bg-[#0c2217] hover:bg-[#143d2b] text-[#f5f0e6] border-2 border-[#d4a359]/50 hover:border-[#d4a359] hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-xl cursor-pointer group"
+        >
+          <span className="flex h-2.5 w-2.5 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d4a359] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#d4a359]"></span>
+          </span>
+          <QrCode className="w-4 h-4 text-[#d4a359]" />
+          <span className="text-xs font-bold tracking-tight text-white">Support Platform</span>
+          <span className="hidden sm:inline text-[10px] font-mono text-[#d4a359] bg-[#143d2b] px-2 py-0.5 rounded-full border border-[#d4a359]/40">
+            Sadaqah Jariyah
+          </span>
+          <Heart className="w-3.5 h-3.5 text-rose-400 shrink-0 fill-rose-400/20" />
+        </button>
+      </div>
+
+      {/* 2. Floating WhatsApp Direct Support Button (Bottom Right) */}
+      <div className="fixed bottom-5 right-4 sm:right-6 z-40">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact WhatsApp Support"
+          className="flex items-center gap-2.5 px-4 py-2.5 rounded-full shadow-[0_8px_30px_rgba(16,185,129,0.35)] bg-gradient-to-r from-[#10b981] to-[#059669] hover:from-[#059669] hover:to-[#047857] text-white hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-xl cursor-pointer group border border-emerald-400/30"
+        >
+          <div className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+          <MessageCircle className="w-4 h-4 text-white" />
+          <span className="text-xs font-extrabold tracking-tight">Support: +92 317 1759093</span>
+        </a>
+      </div>
+
+      {/* Footer */}
       <footer className="relative z-20 border-t border-[#d4a359]/20 bg-[#050e09] py-8 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
           <div className="flex items-center gap-2">
@@ -450,19 +501,32 @@ export default function App() {
             © {new Date().getFullYear()} IlmiDunya Pakistan. All rights reserved.
           </div>
 
-          <div>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setSupportModalOpen(true)}
+              className="text-[#d4a359] hover:text-white font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+            >
+              <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/20" />
+              Support Platform
+            </button>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#d4a359] hover:text-white font-semibold transition-colors flex items-center gap-1.5"
+              className="text-[#10b981] hover:text-white font-semibold transition-colors flex items-center gap-1"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-3.5 h-3.5" />
               WhatsApp: +92 317 1759093
             </a>
           </div>
         </div>
       </footer>
+
+      {/* Support Platform Modal Dialog */}
+      <SupportPlatformModal
+        isOpen={supportModalOpen}
+        onClose={() => setSupportModalOpen(false)}
+      />
     </div>
   );
 }
