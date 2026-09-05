@@ -1,14 +1,11 @@
-'use client';
-
 import React from 'react';
 
 /**
  * BrandLogo component for IlmiDunya Pakistan.
- * Renders the authentic logo artwork provided by the user.
+ * Renders the authentic logo artwork with responsive sizing.
  *
- * @param {'light' | 'dark' | 'icon'} variant - Color scheme ('light' for navbar/white cards, 'dark' for footer)
+ * @param {'light' | 'dark' | 'icon'} variant - Color scheme
  * @param {'xs' | 'sm' | 'md' | 'lg'} size - Overall dimension scaling
- * @param {boolean} withUrdu - Display option
  * @param {boolean} withBadge - Whether to display the "Pakistan" badge
  * @param {string} className - Optional custom class name
  */
@@ -21,14 +18,14 @@ export default function BrandLogo({
   const isDark = variant === 'dark';
   const isIconOnly = variant === 'icon';
 
-  const heights = {
-    xs: 26,
-    sm: 32,
-    md: 40,
-    lg: 52
+  const heightClasses = {
+    xs: 'h-6 sm:h-7',
+    sm: 'h-7 sm:h-8',
+    md: 'h-8 sm:h-10',
+    lg: 'h-9 sm:h-12'
   };
 
-  const currentHeight = heights[size] || heights.md;
+  const currentHeightClass = heightClasses[size] || heightClasses.md;
 
   if (isIconOnly) {
     return (
@@ -36,10 +33,7 @@ export default function BrandLogo({
         <img
           src="/icon.svg"
           alt="IlmiDunya Icon"
-          width={currentHeight}
-          height={currentHeight}
-          className="object-contain select-none transition-transform group-hover:scale-105"
-          style={{ height: currentHeight, width: currentHeight }}
+          className={`${currentHeightClass} w-auto object-contain select-none transition-transform group-hover:scale-105`}
         />
       </div>
     );
@@ -48,17 +42,15 @@ export default function BrandLogo({
   const logoSrc = isDark ? '/logo-dark.svg' : '/logo.svg';
 
   return (
-    <div className={`inline-flex items-center gap-2 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-2 select-none shrink-0 ${className}`}>
       <img
         src={logoSrc}
         alt="IlmiDunya Pakistan"
-        height={currentHeight}
-        className="h-auto object-contain select-none transition-transform group-hover:scale-[1.02]"
-        style={{ height: currentHeight, width: 'auto' }}
+        className={`${currentHeightClass} w-auto max-w-[140px] sm:max-w-none object-contain select-none transition-transform group-hover:scale-[1.02]`}
       />
       {withBadge && (
         <span
-          className={`px-1.5 py-0.5 rounded text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider ${
+          className={`hidden sm:inline-block px-1.5 py-0.5 rounded text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider ${
             isDark
               ? 'bg-[#c25d33] text-white border border-[#c25d33]/50 shadow-xs'
               : 'bg-[#c25d33] text-white shadow-2xs'
@@ -70,4 +62,3 @@ export default function BrandLogo({
     </div>
   );
 }
-
