@@ -439,16 +439,6 @@ export default function App() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="px-4 py-2 rounded-xl bg-black/40 border border-white/5 text-center">
-              <div className="text-lg font-black text-[#d4a359]">500+</div>
-              <div className="text-[10px] text-stone-400 uppercase tracking-wider">Tutors Ready</div>
-            </div>
-            <div className="px-4 py-2 rounded-xl bg-black/40 border border-white/5 text-center">
-              <div className="text-lg font-black text-[#b85d34]">1,200+</div>
-              <div className="text-[10px] text-stone-400 uppercase tracking-wider">Pre-Enrolled</div>
-            </div>
-          </div>
         </div>
       </main>
 
