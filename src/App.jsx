@@ -225,7 +225,7 @@ export default function App() {
                   }`}
                 >
                   <BookOpen className="w-3.5 h-3.5" />
-                  I'm a Student / Parent
+                  I'm a Student
                 </button>
                 <button
                   type="button"
@@ -237,7 +237,7 @@ export default function App() {
                   }`}
                 >
                   <GraduationCap className="w-3.5 h-3.5" />
-                  I'm a Tutor / Teacher
+                  I'm a Tutor
                 </button>
               </div>
 
