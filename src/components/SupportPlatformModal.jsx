@@ -12,6 +12,16 @@ import {
 
 const paymentMethods = [
   {
+    id: 'meezan',
+    name: 'Meezan Bank',
+    shortName: 'Meezan Bank',
+    category: 'Islamic Banking',
+    accountTitle: 'Abdul Khaliq',
+    accountNumber: '96010105435308',
+    qrImage: '/images/qr-meezan.jpg',
+    instructions: 'Scan with Meezan Bank App or transfer to account 96010105435308.'
+  },
+  {
     id: 'easypaisa',
     name: 'EasyPaisa',
     shortName: 'EasyPaisa',
@@ -32,16 +42,6 @@ const paymentMethods = [
     instructions: 'Transfer directly from your JazzCash app or Raast to 03171759093.'
   },
   {
-    id: 'meezan',
-    name: 'Meezan Bank',
-    shortName: 'Meezan Bank',
-    category: 'Islamic Banking',
-    accountTitle: 'Abdul Khaliq',
-    accountNumber: '96010105435308',
-    qrImage: '/images/qr-meezan.jpg',
-    instructions: 'Scan with Meezan Bank App or transfer to account 96010105435308.'
-  },
-  {
     id: 'upaisa',
     name: 'UPaisa / UBank',
     shortName: 'UPaisa',
@@ -54,7 +54,7 @@ const paymentMethods = [
 ];
 
 export default function SupportPlatformModal({ isOpen, onClose }) {
-  const [activeTab, setActiveTab] = useState('easypaisa');
+  const [activeTab, setActiveTab] = useState('meezan');
   const [copiedText, setCopiedText] = useState(null);
 
   if (!isOpen) return null;
@@ -169,7 +169,7 @@ export default function SupportPlatformModal({ isOpen, onClose }) {
               <div className="p-2.5 rounded-xl bg-[#0c2217] border border-[#d4a359]/50 text-left flex items-center justify-between gap-2">
                 <div className="min-w-0 flex-1">
                   <p className="text-[9px] uppercase tracking-wider font-bold text-stone-400">
-                    Account / Mobile / Raast ID
+                    {selectedMethod.id === 'meezan' ? 'Account Number' : 'Account Number / Raast ID'}
                   </p>
                   <p className="text-xs sm:text-sm font-black text-[#d4a359] mt-0.5 font-mono tracking-wider truncate">
                     {selectedMethod.accountNumber}
