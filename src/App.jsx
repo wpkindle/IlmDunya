@@ -198,19 +198,21 @@ export default function App() {
         </div>
 
         {/* VIP WAITLIST REGISTRATION CARD */}
-        <div className="w-full max-w-xl glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border-[#d4a359]/35 shadow-2xl relative mb-14 sm:mb-20 box-border overflow-hidden">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-white shadow-md">
-            ⭐ Early Bird VIP Access
+        <div className="w-full max-w-xl glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-[#d4a359]/35 shadow-2xl relative mb-14 sm:mb-20 box-border flex flex-col items-center">
+          {/* Early Bird VIP Access Tag (Inside Card - Never Cut Off) */}
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] text-[10px] sm:text-xs font-black uppercase tracking-wider text-white shadow-md mb-2.5 sm:mb-3 border border-[#fde047]/30">
+            <Sparkles className="w-3.5 h-3.5 text-amber-200" />
+            <span>Early Bird VIP Access</span>
           </div>
 
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="mt-2 space-y-3 sm:space-y-4 text-left w-full">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-left w-full">
               <div className="text-center mb-3 sm:mb-5">
-                <h3 className="text-base sm:text-xl font-bold text-white mb-1">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
                   Join the Exclusive Waitlist
                 </h3>
                 <p className="text-[11px] sm:text-sm text-stone-300 leading-normal px-1">
-                  Claim <span className="text-[#d4a359] font-bold">2 Free Trial Classes</span> + verified tutor priority when we launch.
+                  Get <strong className="text-[#d4a359]">priority early access</strong> to certified Qaris, Alimahs &amp; subject educators.
                 </p>
               </div>
 
@@ -297,7 +299,7 @@ export default function App() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full max-w-full mt-1.5 py-3 sm:py-3.5 px-3 sm:px-6 rounded-xl bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] hover:from-[#f59e0b] hover:to-[#b85d34] text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-[#b85d34]/30 hover:shadow-[#d4a359]/40 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 group cursor-pointer disabled:opacity-60 box-border text-center"
+                className="w-full max-w-full mt-1.5 py-3 sm:py-3.5 px-3 sm:px-6 rounded-xl bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] hover:from-[#f59e0b] hover:to-[#b85d34] text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-[#b85d34]/30 hover:shadow-[#d4a359]/40 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-60 box-border text-center"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -307,10 +309,7 @@ export default function App() {
                 ) : (
                   <>
                     <Bell className="w-3.5 h-3.5 text-amber-200 shrink-0 group-hover:rotate-12 transition-transform" />
-                    <span className="leading-tight text-center">
-                      <span className="sm:hidden">Get VIP Early Access (2 Free Classes)</span>
-                      <span className="hidden sm:inline">Get VIP Early Access &amp; 2 Free Trial Classes</span>
-                    </span>
+                    <span>Get VIP Early Access</span>
                     <ArrowRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
@@ -335,7 +334,7 @@ export default function App() {
               <div className="pt-1">
                 <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-[11px] sm:text-xs font-semibold text-stone-300">
                   <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                  Founding Member: Priority Trial Unlocked
+                  Founding Member: Priority Access Unlocked
                 </span>
               </div>
             </div>
