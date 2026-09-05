@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
 import {
   BookOpen,
   GraduationCap,
   ShieldCheck,
   Video,
-  Clock,
   Sparkles,
-  CheckCircle2,
-  Bell,
-  ArrowRight,
   MessageCircle,
   MapPin,
-  Users,
-  Award,
   ChevronRight,
-  Star,
-  Phone,
-  Heart,
-  QrCode
+  Heart
 } from 'lucide-react';
 import AnimatedHeroBackground from './components/AnimatedHeroBackground';
 import BrandLogo from './components/BrandLogo';
@@ -47,24 +37,8 @@ export default function App() {
   // Countdown Timer State (Target: 11 days)
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
 
-  // Waitlist Form State
-  const [role, setRole] = useState('student'); // 'student' | 'tutor'
-  const [fullName, setFullName] = useState('');
-  const [whatsappNumber, setWhatsappNumber] = useState('');
-  const [subjectInterest, setSubjectInterest] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   // Support Modal State
   const [supportModalOpen, setSupportModalOpen] = useState(false);
-
-  // Check local storage for previous registration
-  useEffect(() => {
-    const saved = localStorage.getItem('ilmidunya_waitlist_registered');
-    if (saved) {
-      setIsSubmitted(true);
-    }
-  }, []);
 
   // Live real-time countdown timer ticking every second
   useEffect(() => {
@@ -76,29 +50,7 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // Handle Form Submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!whatsappNumber.trim()) return;
-
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      localStorage.setItem('ilmidunya_waitlist_registered', 'true');
-
-      // Trigger Confetti Celebration
-      confetti({
-        particleCount: 130,
-        spread: 75,
-        origin: { y: 0.6 },
-        colors: ['#d4a359', '#b85d34', '#fbbf24', '#15a18d', '#ffffff']
-      });
-    }, 700);
-  };
-
-  const whatsappUrl = "https://wa.me/923171759093?text=Salam%20IlmiDunya!%20I%20am%20interested%20in%20early%20access.";
+  const whatsappUrl = "https://wa.me/923171759093?text=Salam%20IlmiDunya!%20I%20am%20interested%20in%20learning%20more%20about%20the%20platform.";
 
   return (
     <div className="relative min-h-screen bg-[#0c2217] text-[#faf8f5] overflow-x-hidden w-full max-w-full flex flex-col justify-between">
@@ -197,148 +149,24 @@ export default function App() {
           </div>
         </div>
 
-        {/* VIP WAITLIST REGISTRATION CARD */}
-        <div className="w-full max-w-xl glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-[#d4a359]/35 shadow-2xl relative mb-14 sm:mb-20 box-border flex flex-col items-center">
-          {/* Early Bird VIP Access Tag (Inside Card - Never Cut Off) */}
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] text-[10px] sm:text-xs font-black uppercase tracking-wider text-white shadow-md mb-2.5 sm:mb-3 border border-[#fde047]/30">
-            <Sparkles className="w-3.5 h-3.5 text-amber-200" />
-            <span>Early Bird VIP Access</span>
-          </div>
-
-          {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-left w-full">
-              <div className="text-center mb-3 sm:mb-5">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                  Join the Exclusive Waitlist
-                </h3>
-                <p className="text-[11px] sm:text-sm text-stone-300 leading-normal px-1">
-                  Get <strong className="text-[#d4a359]">priority early access</strong> to certified Qaris, Alimahs &amp; subject educators.
-                </p>
-              </div>
-
-              {/* Role Toggle Tabs */}
-              <div className="grid grid-cols-2 gap-1.5 p-1 bg-black/40 rounded-xl border border-white/5 w-full">
-                <button
-                  type="button"
-                  onClick={() => setRole('student')}
-                  className={`py-2 px-1.5 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer truncate ${
-                    role === 'student'
-                      ? 'bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-white shadow-md'
-                      : 'text-stone-400 hover:text-white'
-                  }`}
-                >
-                  <BookOpen className="w-3.5 h-3.5 shrink-0" />
-                  <span className="truncate">I'm a Student</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setRole('tutor')}
-                  className={`py-2 px-1.5 text-[11px] sm:text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer truncate ${
-                    role === 'tutor'
-                      ? 'bg-gradient-to-r from-[#d4a359] to-[#b85d34] text-white shadow-md'
-                      : 'text-stone-400 hover:text-white'
-                  }`}
-                >
-                  <GraduationCap className="w-3.5 h-3.5 shrink-0" />
-                  <span className="truncate">I'm a Tutor</span>
-                </button>
-              </div>
-
-              {/* Name Field */}
-              <div className="w-full">
-                <label className="block text-[11px] sm:text-xs font-semibold text-stone-300 mb-1">
-                  Your Full Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. Muhammad Bilal / Fatima Zahra"
-                  className="w-full max-w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all box-border"
-                />
-              </div>
-
-              {/* WhatsApp Number Field */}
-              <div className="w-full">
-                <label className="block text-[11px] sm:text-xs font-semibold text-stone-300 mb-1">
-                  WhatsApp Number
-                </label>
-                <div className="relative w-full">
-                  <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#d4a359]" />
-                  <input
-                    type="tel"
-                    required
-                    value={whatsappNumber}
-                    onChange={(e) => setWhatsappNumber(e.target.value)}
-                    placeholder="e.g. +92 317 1759093"
-                    className="w-full max-w-full pl-9 pr-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all box-border"
-                  />
-                </div>
-              </div>
-
-              {/* Subject Field */}
-              <div className="w-full">
-                <label className="block text-[11px] sm:text-xs font-semibold text-stone-300 mb-1">
-                  {role === 'student' ? 'Subject / Quran Course Needed' : 'Subjects / Courses You Teach'}
-                </label>
-                <input
-                  type="text"
-                  value={subjectInterest}
-                  onChange={(e) => setSubjectInterest(e.target.value)}
-                  placeholder={
-                    role === 'student'
-                      ? 'e.g. Tajweed, Quran Hifz, Math...'
-                      : 'e.g. Alimah, O-Level, Chemistry...'
-                  }
-                  className="w-full max-w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-[#07150e]/90 border border-[#d4a359]/30 text-xs sm:text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-[#d4a359] focus:border-transparent transition-all box-border"
-                />
-              </div>
-
-              {/* Submit CTA Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full max-w-full mt-1.5 py-3 sm:py-3.5 px-3 sm:px-6 rounded-xl bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#9e4e2a] hover:from-[#f59e0b] hover:to-[#b85d34] text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-[#b85d34]/30 hover:shadow-[#d4a359]/40 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-60 box-border text-center"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Securing Your Spot...
-                  </span>
-                ) : (
-                  <>
-                    <Bell className="w-3.5 h-3.5 text-amber-200 shrink-0 group-hover:rotate-12 transition-transform" />
-                    <span>Get VIP Early Access</span>
-                    <ArrowRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
-              </button>
-
-              <div className="flex items-center justify-center gap-1.5 flex-wrap text-[10px] sm:text-[11px] text-stone-400 pt-1 text-center">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#d4a359] shrink-0" />
-                <span>100% Privacy Protected • WhatsApp Notification</span>
-              </div>
-            </form>
-          ) : (
-            <div className="py-6 sm:py-8 text-center space-y-3 sm:space-y-4">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#d4a359]/20 border border-[#d4a359]/60 flex items-center justify-center mx-auto text-[#d4a359]">
-                <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10" />
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-white">
-                JazakAllah Khair, You're Registered!
-              </h3>
-              <p className="text-xs sm:text-sm text-stone-300 max-w-md mx-auto leading-relaxed">
-                Your VIP invitation has been locked in. We will reach out to your WhatsApp (<strong className="text-[#d4a359]">{whatsappNumber || '+92 317 1759093'}</strong>) the moment IlmiDunya launches.
-              </p>
-              <div className="pt-1">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-[11px] sm:text-xs font-semibold text-stone-300">
-                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                  Founding Member: Priority Access Unlocked
-                </span>
-              </div>
-            </div>
-          )}
+        {/* DIRECT ACTION CTA BUTTONS */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-md mx-auto mb-14 sm:mb-20 px-2">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#10b981] to-[#059669] hover:from-[#059669] hover:to-[#047857] text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/50 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+          >
+            <MessageCircle className="w-4 h-4 text-white" />
+            <span>Connect on WhatsApp</span>
+          </a>
+          <button
+            onClick={() => setSupportModalOpen(true)}
+            className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#0c2217] hover:bg-[#143d2b] border-2 border-[#d4a359]/50 hover:border-[#d4a359] text-white text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer"
+          >
+            <Heart className="w-4 h-4 text-rose-400 fill-rose-400/20" />
+            <span>Support Platform</span>
+          </button>
         </div>
 
         {/* 4 CORE VALUE PILLARS */}
