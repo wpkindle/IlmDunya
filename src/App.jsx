@@ -478,36 +478,27 @@ export default function App() {
         </a>
       </div>
 
-      {/* Footer */}
-      <footer className="relative z-20 border-t border-[#d4a359]/20 bg-[#050e09] py-6 sm:py-8 text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-400">
-          <div className="flex items-center gap-2">
-            <BrandLogo variant="dark" size="xs" withBadge={true} />
-            <span>•</span>
-            <span className="font-urdu text-sm text-[#d4a359]" dir="rtl">علمی دُنیا پاکستان</span>
+      {/* Footer (Optimized for Mobile & Desktop with Floating Button Safe Clearance) */}
+      <footer className="relative z-20 border-t border-[#d4a359]/20 bg-[#050e09] pt-8 pb-24 sm:pt-10 sm:pb-28 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center gap-3 text-xs text-stone-400">
+          {/* Brand Logo & Authentic Urdu Script */}
+          <div className="flex items-center justify-center gap-2.5 flex-wrap">
+            <BrandLogo variant="dark" size="sm" withBadge={true} />
+            <span className="text-[#d4a359]/40">•</span>
+            <span className="font-urdu text-base sm:text-lg text-[#d4a359]" dir="rtl">
+              علمی دُنیا پاکستان
+            </span>
           </div>
 
-          <div>
+          {/* Mission & Trust Tagline */}
+          <p className="text-stone-300 text-xs sm:text-sm max-w-lg font-normal leading-relaxed">
+            Pakistan's Premier 1-on-1 Quran &amp; Academic Learning Platform.
+            <span className="hidden sm:inline text-stone-400"> Verified Qaris, Alimahs &amp; Subject Tutors.</span>
+          </p>
+
+          {/* Copyright & Safe Zone Clearance */}
+          <div className="text-[11px] sm:text-xs text-stone-500 pt-1">
             © {new Date().getFullYear()} IlmiDunya Pakistan. All rights reserved.
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setSupportModalOpen(true)}
-              className="text-[#d4a359] hover:text-white font-semibold transition-colors flex items-center gap-1 cursor-pointer"
-            >
-              <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/20" />
-              Support Platform
-            </button>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#10b981] hover:text-white font-semibold transition-colors flex items-center gap-1"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              WhatsApp: +92 317 1759093
-            </a>
           </div>
         </div>
       </footer>
