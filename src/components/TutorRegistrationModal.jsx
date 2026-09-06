@@ -98,16 +98,16 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-serif font-black text-base sm:text-lg text-[#0c311e] leading-tight">
-                  {step === 1 ? "Early Tutor Faculty Registration" : "Welcome, Founding Educator!"}
+                  {step === 1 ? "Early Tutor Registration" : "Registration Successful!"}
                 </h3>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#fef3c7] text-[#92400e] border border-[#d4a359]/50">
-                  {step === 1 ? "Early Access" : "VIP Priority"}
+                  {step === 1 ? "Early Access" : "Priority Saved"}
                 </span>
               </div>
               <p className="text-[11px] sm:text-xs text-[#406851] font-medium">
                 {step === 1
                   ? "Join verified Qaris & academic educators for pre-launch student matching"
-                  : "Your Founding Faculty application is priority-listed for launch day"}
+                  : "You are placed on our priority tutor list for launch day"}
               </p>
             </div>
           </div>
@@ -182,7 +182,7 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="0317 1234567"
+                      placeholder="Enter your whatsapp or phone number"
                       className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#f8faf8] border border-[#c8dcd0] focus:border-[#d4a359] focus:bg-white focus:outline-none text-[#0c311e] text-xs placeholder:text-stone-400 shadow-xs"
                     />
                   </div>
@@ -302,17 +302,17 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                 <CheckCircle2 className="w-9 h-9 text-emerald-600" />
               </div>
 
-              {/* PROMINENT MOTIVATING FOUNDING FACULTY NOTICE */}
+              {/* PROMINENT MOTIVATING TUTOR NOTICE */}
               <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#f9fbf9] via-[#edf6ef] to-[#e4eee6] border-2 border-[#d4a359]/60 shadow-lg text-center space-y-3 relative overflow-hidden">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fef3c7] border border-[#d4a359]/60 text-[#92400e] text-[11px] font-black tracking-wide uppercase shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#d97706]" />
-                  <span>Founding Faculty VIP Status Secured</span>
+                  <span>Priority Tutor Status Confirmed</span>
                 </div>
                 <h4 className="text-base sm:text-lg font-serif font-black text-[#0c311e] leading-snug">
-                  Welcome to the IlmiDunya Founding Faculty!
+                  Welcome to the IlmiDunya Teaching Family!
                 </h4>
                 <p className="text-xs sm:text-sm text-[#284835] leading-relaxed font-medium">
-                  Your dedication to spreading Ilm is deeply honored. You have secured <strong className="text-[#b85d34]">VIP Priority Placement</strong> for direct student matching on launch day — our faculty team will connect with you shortly with exclusive onboarding details and early perks!
+                  Great to have you with us! You are now placed on our <strong className="text-[#b85d34]">VIP priority list</strong> for launch day. When we go live, students looking for your subjects will be connected directly with you — with <strong className="text-[#059669]">0% commission cuts</strong>, full respect, and complete freedom to set your own fees. We will contact you soon with all the details!
                 </p>
               </div>
 
@@ -349,7 +349,7 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                   className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#1ebc59] hover:to-[#0f7a6e] text-white font-black text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.01]"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Connect with Faculty Coordinator on WhatsApp</span>
+                  <span>Connect with Us on WhatsApp</span>
                 </a>
 
                 <button
@@ -357,7 +357,7 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                   onClick={onClose}
                   className="w-full py-2.5 rounded-xl border border-[#c8dcd0] text-[#284835] hover:text-[#0c311e] text-xs font-semibold hover:bg-[#edf5ef] transition-colors cursor-pointer"
                 >
-                  Close &amp; Return to Coming Soon Page
+                  Close &amp; Return to Home
                 </button>
               </div>
             </div>
