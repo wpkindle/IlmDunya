@@ -63,8 +63,8 @@ export default function App() {
       {/* 1. EXACT ANIMATED HERO BACKGROUND EFFECT FROM MAIN WEBSITE */}
       <AnimatedHeroBackground />
 
-      {/* Top Header Navigation (Mobile Optimized & Light Illuminated) */}
-      <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/30 bg-white/90 backdrop-blur-md shadow-xs overflow-x-hidden">
+      {/* Top Header Navigation (Sticky, Mobile Optimized & Light Illuminated) */}
+      <header className="sticky top-0 z-30 w-full max-w-full border-b border-[#d4a359]/30 bg-white/90 backdrop-blur-md shadow-xs overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Authentic Brand Logo */}
           <a href="/" className="flex items-center group py-0.5 shrink-0" title="IlmiDunya">
