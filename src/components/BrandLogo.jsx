@@ -20,9 +20,9 @@ export default function BrandLogo({
 
   const heightClasses = {
     xs: 'h-6 sm:h-7',
-    sm: 'h-7 sm:h-8',
-    md: 'h-8 sm:h-10',
-    lg: 'h-9 sm:h-12'
+    sm: 'h-8 sm:h-9',
+    md: 'h-9 sm:h-11 md:h-12',
+    lg: 'h-11 sm:h-13 md:h-16'
   };
 
   const currentHeightClass = heightClasses[size] || heightClasses.md;
@@ -46,7 +46,7 @@ export default function BrandLogo({
       <img
         src={logoSrc}
         alt="IlmiDunya"
-        className={`${currentHeightClass} w-auto max-w-[140px] sm:max-w-none object-contain select-none transition-transform group-hover:scale-[1.02]`}
+        className={`${currentHeightClass} w-auto object-contain select-none transition-transform group-hover:scale-[1.02]`}
       />
     </div>
   );
