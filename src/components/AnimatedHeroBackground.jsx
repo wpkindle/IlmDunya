@@ -60,27 +60,27 @@ export default function AnimatedHeroBackground() {
       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none max-w-full"
       aria-hidden="true"
     >
-      {/* 1. Deep Editorial Base Tones */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05110b] via-[#0c2217] to-[#07150e]" />
+      {/* 1. Deep Editorial Base Tones - Lightened & Illuminated */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0e3b26] via-[#145336] to-[#0c3521]" />
 
-      {/* 2. Dynamic Moving Aurora Multi-Gradient Layer (High Visibility) */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#0c2217] via-[#1a4e36] to-[#143d2b] animate-aurora opacity-90 mix-blend-screen" />
+      {/* 2. Dynamic Moving Aurora Multi-Gradient Layer (High Visibility & Brightness) */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#134e32] via-[#1f734a] to-[#185e3c] animate-aurora opacity-95 mix-blend-screen" />
 
       {/* 3. Luminous Interactive Mouse Spotlight (Bright glowing lantern effect) */}
       <div
         className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
         style={{
           background: `
-            radial-gradient(340px circle at var(--mouse-x) var(--mouse-y), rgba(254, 240, 138, 0.32) 0%, transparent 80%),
-            radial-gradient(750px circle at var(--mouse-x) var(--mouse-y), rgba(212, 163, 89, 0.45) 0%, rgba(184, 93, 52, 0.25) 42%, transparent 75%)
+            radial-gradient(360px circle at var(--mouse-x) var(--mouse-y), rgba(254, 240, 138, 0.40) 0%, transparent 80%),
+            radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 163, 89, 0.50) 0%, rgba(184, 93, 52, 0.30) 45%, transparent 75%)
           `
         }}
       />
 
       {/* 4. Pulsing Atmospheric Ambient Orbs (Responsive Mobile Scaling) */}
-      <div className="absolute -top-16 -left-16 w-[320px] h-[320px] sm:w-[600px] sm:h-[600px] bg-[#1e543c]/40 rounded-full blur-[90px] sm:blur-[110px] animate-pulse-glow" />
-      <div className="absolute top-1/4 -right-16 w-[340px] h-[340px] sm:w-[650px] sm:h-[650px] bg-[#d4a359]/25 rounded-full blur-[100px] sm:blur-[120px] animate-float-reverse" />
-      <div className="absolute -bottom-16 left-1/4 w-[360px] h-[300px] sm:w-[680px] sm:h-[520px] bg-[#b85d34]/20 rounded-full blur-[90px] sm:blur-[110px] animate-float-slow" />
+      <div className="absolute -top-16 -left-16 w-[320px] h-[320px] sm:w-[600px] sm:h-[600px] bg-[#2b8057]/45 rounded-full blur-[80px] sm:blur-[100px] animate-pulse-glow" />
+      <div className="absolute top-1/4 -right-16 w-[340px] h-[340px] sm:w-[650px] sm:h-[650px] bg-[#d4a359]/35 rounded-full blur-[90px] sm:blur-[110px] animate-float-reverse" />
+      <div className="absolute -bottom-16 left-1/4 w-[360px] h-[300px] sm:w-[680px] sm:h-[520px] bg-[#c25d33]/25 rounded-full blur-[80px] sm:blur-[100px] animate-float-slow" />
 
       {/* 5. Sacred Islamic Geometric Wireframe (Top-Right Astrolabe - Mobile Clamped) */}
       <div className="absolute -top-12 -right-12 sm:-top-24 sm:right-4 lg:right-8 w-[240px] h-[240px] sm:w-[700px] sm:h-[700px] pointer-events-none opacity-20 sm:opacity-85 animate-spin-slow overflow-hidden">

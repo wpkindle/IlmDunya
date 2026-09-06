@@ -21,33 +21,6 @@ import {
 import confetti from 'canvas-confetti';
 import { api } from '../services/api';
 
-const CITIES = [
-  'Lahore',
-  'Karachi',
-  'Islamabad',
-  'Rawalpindi',
-  'Faisalabad',
-  'Peshawar',
-  'Multan',
-  'Hyderabad',
-  'Quetta',
-  'Gujranwala',
-  'Sialkot',
-  'Abbottabad',
-  'Nationwide / Online'
-];
-
-const SUBJECTS = [
-  'Quran Recitation & Tajweed',
-  'Hifz al-Quran (Memorization)',
-  'Noorani Qaida for Beginners',
-  'Islamic Studies & Dars-e-Nizami',
-  'Arabic Grammar & Language',
-  'Cambridge O/A Level Mathematics & Physics',
-  'Matric & FSc Pre-Medical / Pre-Engineering',
-  'English Fluency & IELTS Academic'
-];
-
 export default function TutorRegistrationModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1); // 1: Form, 2: Verification, 3: Success
 
@@ -58,8 +31,8 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [gender, setGender] = useState('male');
-  const [city, setCity] = useState('Lahore');
-  const [primarySubject, setPrimarySubject] = useState('Quran Recitation & Tajweed');
+  const [city, setCity] = useState('');
+  const [primarySubject, setPrimarySubject] = useState('');
   const [teachingMode, setTeachingMode] = useState('online');
 
   // OTP Verification State
@@ -98,9 +71,11 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
         password,
         role: 'tutor',
         gender,
-        city,
-        qualifications: primarySubject,
-        bio: `Experienced ${gender === 'female' ? 'female Alimah / educator' : 'Qari / tutor'} specializing in ${primarySubject}. Available for ${teachingMode} classes.`
+        city: city.trim(),
+        qualifications: primarySubject.trim(),
+        whatWillYouTeach: primarySubject.trim(),
+        teachingMode,
+        bio: `Experienced ${gender === 'female' ? 'female Alimah / educator' : 'Qari / tutor'} specializing in ${primarySubject.trim()}. Available for ${teachingMode} classes.`
       };
 
       const res = await api.registerTutor(payload);
@@ -164,19 +139,19 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
   )}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#07150e]/85 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="w-full max-w-xl max-h-[92dvh] flex flex-col rounded-3xl bg-[#0c2217] border-2 border-[#d4a359]/40 shadow-2xl text-[#f5f0e6] relative overflow-hidden"
+        className="w-full max-w-xl max-h-[92dvh] flex flex-col rounded-3xl bg-gradient-to-b from-[#164e32] to-[#0d3420] border-2 border-[#d4a359]/70 shadow-2xl text-[#f5f0e6] relative overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
         {/* Top Gold Accent Bar */}
-        <div className="h-1 bg-gradient-to-r from-[#d4a359] via-[#b85d34] to-[#d4a359] shrink-0" />
+        <div className="h-1.5 bg-gradient-to-r from-[#d4a359] via-[#fde047] to-[#d4a359] shrink-0" />
 
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 border-b border-[#143d2b] flex items-center justify-between shrink-0 bg-[#0c2217]">
+        <div className="p-4 sm:p-5 border-b border-[#236e47] flex items-center justify-between shrink-0 bg-[#185537]">
           <div className="flex items-center gap-3">
-            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#143d2b] text-[#d4a359] border border-[#d4a359]/40">
+            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#113f28] text-[#d4a359] border border-[#d4a359]/50 shadow-md">
               <UserCheck className="w-5 h-5 text-[#d4a359]" />
             </div>
             <div>
@@ -186,13 +161,13 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                   {step === 2 && 'Verify Your Email Address'}
                   {step === 3 && 'Tutor Application Verified!'}
                 </h3>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#143d2b] text-[#d4a359] border border-[#d4a359]/30">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#113f28] text-[#d4a359] border border-[#d4a359]/40">
                   {step === 1 && 'Step 1 of 2'}
                   {step === 2 && 'Step 2 of 2'}
                   {step === 3 && 'Completed'}
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-stone-300 font-medium">
+              <p className="text-[11px] sm:text-xs text-stone-200 font-medium">
                 {step === 1 && 'Join verified Qaris & academic educators for pre-launch student matching'}
                 {step === 2 && 'Enter the 6-digit confirmation code sent to your inbox'}
                 {step === 3 && 'Your tutor faculty membership is confirmed'}
@@ -203,16 +178,16 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="p-2 rounded-xl text-stone-400 hover:text-white hover:bg-[#143d2b] transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-stone-300 hover:text-white hover:bg-[#113f28] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs text-stone-300">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs text-stone-200">
           {error && (
-            <div className="p-3.5 bg-rose-950/70 border border-rose-500/50 text-rose-200 rounded-2xl flex items-start gap-2.5 animate-in fade-in duration-150">
+            <div className="p-3.5 bg-rose-950/80 border border-rose-500/60 text-rose-200 rounded-2xl flex items-start gap-2.5 animate-in fade-in duration-150">
               <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
               <span className="leading-relaxed">{error}</span>
             </div>
@@ -224,7 +199,7 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 {/* Full Name */}
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     Full Legal Name *
                   </label>
                   <div className="relative">
@@ -234,15 +209,15 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Qari Muhammad Huzaifa or Alimah Fatima Zahra"
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs placeholder:text-stone-500"
+                      placeholder="Enter Your Name"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs placeholder:text-stone-400 shadow-inner"
                     />
                   </div>
                 </div>
 
                 {/* Email Address */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     Email Address (For Verification) *
                   </label>
                   <div className="relative">
@@ -253,14 +228,14 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs placeholder:text-stone-500"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs placeholder:text-stone-400 shadow-inner"
                     />
                   </div>
                 </div>
 
                 {/* WhatsApp Phone */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     WhatsApp Phone Number *
                   </label>
                   <div className="relative">
@@ -271,14 +246,14 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="0317 1234567"
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs placeholder:text-stone-500"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs placeholder:text-stone-400 shadow-inner"
                     />
                   </div>
                 </div>
 
                 {/* Password */}
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     Choose Password (Min 6 Characters) *
                   </label>
                   <div className="relative">
@@ -290,12 +265,12 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs placeholder:text-stone-500"
+                      className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs placeholder:text-stone-400 shadow-inner"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-300 hover:text-white"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -304,58 +279,58 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
 
                 {/* Gender */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     Gender *
                   </label>
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs"
+                    className="w-full px-3 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs shadow-inner"
                   >
                     <option value="male">Male (Qari / Tutor)</option>
                     <option value="female">Female (Alimah / Tutor)</option>
                   </select>
                 </div>
 
-                {/* City */}
+                {/* City - Text Input */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     City / Location *
                   </label>
-                  <select
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs"
-                  >
-                    {CITIES.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <MapPin className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      required
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      placeholder="e.g. Lahore, Karachi, Islamabad"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs placeholder:text-stone-400 shadow-inner"
+                    />
+                  </div>
                 </div>
 
-                {/* Primary Subject */}
+                {/* What Will You Teach - Text Input */}
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-[11px] font-bold text-stone-200 block">
-                    Primary Specialization *
+                  <label className="text-[11px] font-bold text-stone-100 block">
+                    What will you teach? *
                   </label>
-                  <select
-                    value={primarySubject}
-                    onChange={(e) => setPrimarySubject(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-[#07150e] border border-white/15 focus:border-[#d4a359] focus:outline-none text-white text-xs"
-                  >
-                    {SUBJECTS.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <BookOpen className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      required
+                      value={primarySubject}
+                      onChange={(e) => setPrimarySubject(e.target.value)}
+                      placeholder="e.g. Quran Tajweed, Noorani Qaida, Hifz, O/A Level Physics, Math"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-[#0e3522] border border-white/20 focus:border-[#d4a359] focus:bg-[#12422a] focus:outline-none text-white text-xs placeholder:text-stone-400 shadow-inner"
+                    />
+                  </div>
                 </div>
 
                 {/* Teaching Mode */}
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-[11px] font-bold text-stone-200 block">
+                  <label className="text-[11px] font-bold text-stone-100 block">
                     Preferred Teaching Mode *
                   </label>
                   <div className="grid grid-cols-3 gap-2">
@@ -370,8 +345,8 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                         onClick={() => setTeachingMode(mode.value)}
                         className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
                           teachingMode === mode.value
-                            ? 'bg-[#143d2b] border-[#d4a359] text-white font-bold shadow-xs'
-                            : 'bg-[#07150e] border-white/10 text-stone-400 hover:text-white'
+                            ? 'bg-[#1b5e3a] border-[#d4a359] text-white font-bold shadow-md'
+                            : 'bg-[#0e3522] border-white/10 text-stone-300 hover:text-white hover:bg-[#12422a]'
                         }`}
                       >
                         <span className="text-[11px] block">{mode.label}</span>

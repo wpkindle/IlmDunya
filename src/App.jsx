@@ -59,12 +59,12 @@ export default function App() {
   const whatsappUrl = "https://wa.me/923171759093?text=Salam%20IlmiDunya!%20I%20am%20interested%20in%20learning%20more%20about%20the%20platform.";
 
   return (
-    <div className="relative min-h-screen bg-[#0c2217] text-[#faf8f5] overflow-x-hidden w-full max-w-full flex flex-col justify-between">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#11402a] via-[#144d32] to-[#0c311e] text-[#faf8f5] overflow-x-hidden w-full max-w-full flex flex-col justify-between">
       {/* 1. EXACT ANIMATED HERO BACKGROUND EFFECT FROM MAIN WEBSITE */}
       <AnimatedHeroBackground />
 
       {/* Top Header Navigation (Mobile Optimized) */}
-      <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/20 bg-[#07150e]/90 backdrop-blur-md overflow-x-hidden">
+      <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/30 bg-[#13442c]/90 backdrop-blur-md overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
           {/* Authentic Brand Logo */}
           <a href="/" className="flex items-center group py-1 shrink-0" title="IlmiDunya">
@@ -182,12 +182,12 @@ export default function App() {
         </div>
 
         {/* STUDENT REGISTRATION WILL START SOON ANNOUNCEMENT CARD */}
-        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-14 p-5 sm:p-6 rounded-3xl glass-card border-2 border-[#d4a359]/50 shadow-2xl bg-gradient-to-b from-[#143d2b]/90 to-[#07150e]/95 text-center space-y-3 relative overflow-hidden">
-          <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#d4a359]/15 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute -bottom-12 -left-12 w-36 h-36 bg-[#b85d34]/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-14 p-5 sm:p-6 rounded-3xl glass-card border-2 border-[#d4a359]/70 shadow-2xl bg-gradient-to-b from-[#185335]/95 to-[#103a24]/98 text-center space-y-3 relative overflow-hidden">
+          <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#d4a359]/25 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -bottom-12 -left-12 w-36 h-36 bg-[#b85d34]/25 rounded-full blur-2xl pointer-events-none" />
 
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#d4a359]/20 text-[#d4a359] border border-[#d4a359]/40 text-[10px] sm:text-xs font-black tracking-wide uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-[#d4a359]" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#d4a359]/25 text-[#fde047] border border-[#d4a359]/50 text-[10px] sm:text-xs font-black tracking-wide uppercase">
+            <Sparkles className="w-3.5 h-3.5 text-[#fde047]" />
             <span>Admissions Notice</span>
           </div>
 
@@ -195,8 +195,8 @@ export default function App() {
             Student Registration Will Start Soon
           </h2>
 
-          <p className="text-xs sm:text-sm text-stone-300 max-w-lg mx-auto leading-relaxed">
-            Student admissions will officially open on launch day (Sept 16, 2026). In the meantime, <strong className="text-[#d4a359]">Early Tutor Registration is now open</strong> for certified Qaris, female Alimahs, and academic educators to verify their credentials.
+          <p className="text-xs sm:text-sm text-stone-200 max-w-lg mx-auto leading-relaxed font-normal">
+            Student admissions will officially open on launch day (Sept 16, 2026). In the meantime, <strong className="text-[#fde047]">Early Tutor Registration is now open</strong> for certified Qaris, female Alimahs, and academic educators to verify their credentials.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
@@ -229,7 +229,7 @@ export default function App() {
           {/* Support Platform Modal Button */}
           <button
             onClick={() => setSupportModalOpen(true)}
-            className="w-full sm:w-auto sm:min-w-[170px] min-h-[52px] sm:min-h-[56px] inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-[#0c2217] hover:bg-[#143d2b] border-2 border-[#d4a359]/50 hover:border-[#d4a359] text-white text-xs sm:text-sm font-bold shadow-lg shadow-black/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 cursor-pointer whitespace-nowrap box-border"
+            className="w-full sm:w-auto sm:min-w-[170px] min-h-[52px] sm:min-h-[56px] inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-[#12422a] hover:bg-[#185536] border-2 border-[#d4a359]/60 hover:border-[#d4a359] text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 cursor-pointer whitespace-nowrap box-border"
           >
             <Heart className="w-4 h-4 text-rose-400 fill-rose-400/20 shrink-0" />
             <span>Support Us</span>
@@ -415,25 +415,25 @@ export default function App() {
       </div>
 
       {/* Footer (Optimized for Mobile & Desktop with Floating Button Safe Clearance) */}
-      <footer className="relative z-20 border-t border-[#d4a359]/20 bg-[#050e09] pt-8 pb-24 sm:pt-10 sm:pb-28 text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center gap-3 text-xs text-stone-400">
+      <footer className="relative z-20 border-t border-[#d4a359]/30 bg-[#0d2f1f] pt-8 pb-24 sm:pt-10 sm:pb-28 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center gap-3 text-xs text-stone-300">
           {/* Brand Logo & Authentic Urdu Script */}
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
             <BrandLogo variant="dark" size="sm" />
-            <span className="text-[#d4a359]/40">•</span>
+            <span className="text-[#d4a359]/60">•</span>
             <span className="font-urdu text-base sm:text-lg text-[#d4a359]" dir="rtl">
               علمی دُنیا پاکستان
             </span>
           </div>
 
           {/* Mission & Trust Tagline */}
-          <p className="text-stone-300 text-xs sm:text-sm max-w-xl font-normal leading-relaxed">
+          <p className="text-stone-200 text-xs sm:text-sm max-w-xl font-normal leading-relaxed">
             Pakistan's Premier 1-on-1 Quran &amp; Academic Platform.
-            <span className="block sm:inline text-stone-400"> Direct Dealing (No 3rd Party) • 100% Female Safety • In-Browser WebRTC.</span>
+            <span className="block sm:inline text-stone-300"> Direct Dealing (No 3rd Party) • 100% Female Safety • In-Browser WebRTC.</span>
           </p>
 
           {/* Copyright & Safe Zone Clearance */}
-          <div className="text-[11px] sm:text-xs text-stone-500 pt-1">
+          <div className="text-[11px] sm:text-xs text-stone-400 pt-1">
             © {new Date().getFullYear()} IlmiDunya Pakistan. All rights reserved.
           </div>
         </div>
