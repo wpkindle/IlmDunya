@@ -556,3 +556,4 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
     </div>
   );
 }
+

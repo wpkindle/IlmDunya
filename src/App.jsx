@@ -212,19 +212,7 @@ export default function App() {
         </div>
 
         {/* DIRECT ACTION CTA BUTTONS */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full max-w-2xl mx-auto mb-14 sm:mb-20 px-3">
-          {/* Primary Tutor Registration Button */}
-          <button
-            onClick={() => setTutorModalOpen(true)}
-            className="w-full sm:w-auto sm:min-w-[220px] min-h-[52px] sm:min-h-[56px] inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#b85d34] via-[#c25d33] to-[#9e4e2a] hover:from-[#d4a359] hover:to-[#b85d34] text-white text-xs sm:text-sm font-black shadow-xl shadow-black/40 hover:scale-[1.02] active:scale-95 transition-all duration-300 cursor-pointer whitespace-nowrap box-border"
-          >
-            <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />
-            <span>Register as a Tutor</span>
-            <span className="text-[10px] bg-white/20 text-white font-extrabold px-2 py-0.5 rounded-full ml-1">
-              Now Open
-            </span>
-          </button>
-
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full max-w-xl mx-auto mb-14 sm:mb-20 px-3">
           {/* WhatsApp Direct Contact Button */}
           <a
             href={whatsappUrl}
