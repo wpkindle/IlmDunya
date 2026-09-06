@@ -70,7 +70,7 @@ export default function SupportPlatformModal({ isOpen, onClose }) {
   const selectedMethod = paymentMethods.find((m) => m.id === activeTab) || paymentMethods[0];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-[#0c311e]/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-black/35 backdrop-blur-sm animate-in fade-in duration-200">
       <div
         className="w-full max-w-lg max-h-[92dvh] sm:max-h-[90dvh] flex flex-col rounded-3xl bg-white border-2 border-[#d4a359]/60 shadow-2xl text-[#1a3325] relative overflow-hidden"
         role="dialog"
@@ -120,14 +120,14 @@ export default function SupportPlatformModal({ isOpen, onClose }) {
                     onClick={() => setActiveTab(method.id)}
                     className={`p-2.5 rounded-2xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-0.5 ${
                       isSelected
-                        ? 'bg-[#0c311e] border-[#d4a359] text-white shadow-md ring-1 ring-[#d4a359]'
+                        ? 'bg-[#b85d34] border-[#b85d34] text-white shadow-md ring-1 ring-[#d4a359]'
                         : 'bg-white border-[#d2e2d8] text-[#284835] hover:bg-[#edf6ef]'
                     }`}
                   >
                     <span className={`text-[11px] sm:text-xs font-black block leading-tight ${isSelected ? 'text-white' : 'text-[#0c311e]'}`}>
                       {method.shortName}
                     </span>
-                    <span className={`text-[9px] font-medium block ${isSelected ? 'text-[#fde047]' : 'text-stone-500'}`}>
+                    <span className={`text-[9px] font-medium block ${isSelected ? 'text-amber-200' : 'text-stone-500'}`}>
                       {method.category}
                     </span>
                   </button>
