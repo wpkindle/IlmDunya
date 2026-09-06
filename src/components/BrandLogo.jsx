@@ -42,23 +42,12 @@ export default function BrandLogo({
   const logoSrc = isDark ? '/logo-dark.svg' : '/logo.svg';
 
   return (
-    <div className={`inline-flex items-center gap-2 select-none shrink-0 ${className}`}>
+    <div className={`inline-flex items-center select-none shrink-0 ${className}`}>
       <img
         src={logoSrc}
-        alt="IlmiDunya Pakistan"
+        alt="IlmiDunya"
         className={`${currentHeightClass} w-auto max-w-[140px] sm:max-w-none object-contain select-none transition-transform group-hover:scale-[1.02]`}
       />
-      {withBadge && (
-        <span
-          className={`hidden sm:inline-block px-1.5 py-0.5 rounded text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider ${
-            isDark
-              ? 'bg-[#c25d33] text-white border border-[#c25d33]/50 shadow-xs'
-              : 'bg-[#c25d33] text-white shadow-2xs'
-          }`}
-        >
-          Pakistan
-        </span>
-      )}
     </div>
   );
 }

@@ -63,8 +63,8 @@ export default function App() {
       <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/20 bg-[#07150e]/90 backdrop-blur-md overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
           {/* Authentic Brand Logo */}
-          <a href="/" className="flex items-center group py-1 shrink-0" title="IlmiDunya Pakistan">
-            <BrandLogo variant="dark" size="sm" withBadge={true} />
+          <a href="/" className="flex items-center group py-1 shrink-0" title="IlmiDunya">
+            <BrandLogo variant="dark" size="sm" />
           </a>
 
           {/* Action Buttons: Support Platform & WhatsApp Contact */}
@@ -121,7 +121,7 @@ export default function App() {
 
         {/* Subtitle Description */}
         <p className="text-xs sm:text-base md:text-lg text-stone-300 max-w-2xl font-normal leading-relaxed mb-5 sm:mb-7 px-2">
-          Connecting students and families across Pakistan directly with certified Qaris, Alimahs, and Cambridge &amp; Board-certified educators — featuring <strong className="text-[#10b981]">direct dealing with no third-party involvement</strong>, <strong className="text-[#d4a359]">guaranteed female safety</strong>, and <strong className="text-[#fbbf24]">official course certificates</strong>.
+          Connecting students and families across Pakistan directly with certified Qaris, Alimahs, and Cambridge &amp; Board-certified educators — featuring <strong className="text-[#10b981]">direct dealing with no third-party involvement</strong> and <strong className="text-[#d4a359]">guaranteed female safety</strong>.
         </p>
 
         {/* 3 Core Trust Badges */}
@@ -135,8 +135,8 @@ export default function App() {
             <span>100% Female Safety &amp; Privacy</span>
           </div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-950/60 border border-amber-400/40 text-[10px] sm:text-xs font-bold text-amber-200 shadow-sm backdrop-blur-sm">
-            <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>Official Certificates Provided</span>
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>Camera-Off Privacy by Default</span>
           </div>
         </div>
 
@@ -199,7 +199,7 @@ export default function App() {
               Why IlmiDunya Will Be Different
             </h2>
             <p className="text-xs sm:text-base text-stone-400 max-w-xl mx-auto px-2">
-              Direct connection, guaranteed female safety, and official certificates — built specifically for Pakistani families and dedicated educators.
+              Direct connection, guaranteed female safety, and verified educators — built specifically for Pakistani families and dedicated educators.
             </p>
           </div>
 
@@ -240,21 +240,21 @@ export default function App() {
               </div>
             </div>
 
-            {/* Pillar 3: Official Course Certificates */}
+            {/* Pillar 3: Flexible 1-on-1 Schedules */}
             <div className="glass-card glass-card-hover rounded-xl sm:rounded-2xl p-4 sm:p-6 border-amber-500/30 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-3 sm:mb-4">
-                  <Award className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
-                  Official Certificates Provided
+                  Flexible Schedules &amp; Timings
                 </h4>
                 <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">
-                  Receive verifiable digital completion certificates and Sanad credentials upon completing your Quran, Tajweed, or academic courses to celebrate and prove your milestones.
+                  Agree directly on morning, evening, or weekend class schedules that perfectly fit your family routine and academic commitments.
                 </p>
               </div>
               <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/5 text-[10px] sm:text-[11px] font-semibold text-amber-400 flex items-center gap-1">
-                Verifiable Credentials <ChevronRight className="w-3 h-3" />
+                Custom Timetable <ChevronRight className="w-3 h-3" />
               </div>
             </div>
 
@@ -375,7 +375,7 @@ export default function App() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center gap-3 text-xs text-stone-400">
           {/* Brand Logo & Authentic Urdu Script */}
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
-            <BrandLogo variant="dark" size="sm" withBadge={true} />
+            <BrandLogo variant="dark" size="sm" />
             <span className="text-[#d4a359]/40">•</span>
             <span className="font-urdu text-base sm:text-lg text-[#d4a359]" dir="rtl">
               علمی دُنیا پاکستان
@@ -385,7 +385,7 @@ export default function App() {
           {/* Mission & Trust Tagline */}
           <p className="text-stone-300 text-xs sm:text-sm max-w-xl font-normal leading-relaxed">
             Pakistan's Premier 1-on-1 Quran &amp; Academic Platform.
-            <span className="block sm:inline text-stone-400"> Direct Dealing (No 3rd Party) • 100% Female Safety • Official Certificates.</span>
+            <span className="block sm:inline text-stone-400"> Direct Dealing (No 3rd Party) • 100% Female Safety • In-Browser WebRTC.</span>
           </p>
 
           {/* Copyright & Safe Zone Clearance */}
