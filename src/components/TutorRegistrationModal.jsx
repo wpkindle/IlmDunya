@@ -98,16 +98,16 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-serif font-black text-base sm:text-lg text-white leading-tight">
-                  {step === 1 ? "Early Tutor Faculty Registration" : "Registration Received!"}
+                  {step === 1 ? "Early Tutor Faculty Registration" : "Welcome, Founding Educator!"}
                 </h3>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#113f28] text-[#d4a359] border border-[#d4a359]/40">
-                  {step === 1 ? "Early Access" : "Received"}
+                  {step === 1 ? "Early Access" : "VIP Priority"}
                 </span>
               </div>
               <p className="text-[11px] sm:text-xs text-stone-200 font-medium">
                 {step === 1
                   ? "Join verified Qaris & academic educators for pre-launch student matching"
-                  : "Your tutor profile information has been safely received"}
+                  : "Your Founding Faculty application is priority-listed for launch day"}
               </p>
             </div>
           </div>
@@ -302,15 +302,18 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                 <CheckCircle2 className="w-9 h-9 text-emerald-400" />
               </div>
 
-              {/* PROMINENT REQUESTED NOTICE */}
-              <div className="p-5 rounded-2xl bg-[#0f3a25] border-2 border-[#10b981] shadow-2xl text-center space-y-2.5">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#185537] border border-[#d4a359]/50 text-[#d4a359] text-[11px] font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Early Access Registered</span>
+              {/* PROMINENT MOTIVATING FOUNDING FACULTY NOTICE */}
+              <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#0f3d27] via-[#144f32] to-[#0c301e] border-2 border-[#d4a359]/70 shadow-2xl text-center space-y-3 relative overflow-hidden">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1b5e3a] border border-[#d4a359]/60 text-[#fde047] text-[11px] font-black tracking-wide uppercase shadow-md">
+                  <Sparkles className="w-3.5 h-3.5 text-[#fde047]" />
+                  <span>Founding Faculty VIP Status Secured</span>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-white leading-relaxed">
-                  Thanks for showing your interest, you will be contacted with further details when the platform goes live.
+                <h4 className="text-base sm:text-lg font-serif font-black text-white leading-snug">
+                  Welcome to the IlmiDunya Founding Faculty!
                 </h4>
+                <p className="text-xs sm:text-sm text-stone-200 leading-relaxed font-medium">
+                  Your dedication to spreading Ilm is deeply honored. You have secured <strong className="text-[#fde047]">VIP Priority Placement</strong> for direct student matching on launch day — our faculty team will connect with you shortly with exclusive onboarding details and early perks!
+                </p>
               </div>
 
               {/* Submitted Details Summary */}
