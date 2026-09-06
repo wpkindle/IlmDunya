@@ -60,27 +60,27 @@ export default function AnimatedHeroBackground() {
       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none max-w-full"
       aria-hidden="true"
     >
-      {/* 1. Deep Editorial Base Tones - Lightened & Illuminated */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0e3b26] via-[#145336] to-[#0c3521]" />
+      {/* 1. Light & Pristine Base Tones */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f8faf8] via-[#edf5ef] to-[#e4eee6]" />
 
-      {/* 2. Dynamic Moving Aurora Multi-Gradient Layer (High Visibility & Brightness) */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#134e32] via-[#1f734a] to-[#185e3c] animate-aurora opacity-95 mix-blend-screen" />
+      {/* 2. Dynamic Moving Aurora Multi-Gradient Layer (Soft Luminous Shimmer) */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#d1fae5]/70 via-[#fef9c3]/60 to-[#dcfce7]/60 animate-aurora opacity-75 mix-blend-multiply" />
 
-      {/* 3. Luminous Interactive Mouse Spotlight (Bright glowing lantern effect) */}
+      {/* 3. Luminous Interactive Mouse Spotlight (Warm golden lantern effect) */}
       <div
         className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
         style={{
           background: `
-            radial-gradient(360px circle at var(--mouse-x) var(--mouse-y), rgba(254, 240, 138, 0.40) 0%, transparent 80%),
-            radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 163, 89, 0.50) 0%, rgba(184, 93, 52, 0.30) 45%, transparent 75%)
+            radial-gradient(360px circle at var(--mouse-x) var(--mouse-y), rgba(254, 240, 138, 0.45) 0%, transparent 80%),
+            radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 163, 89, 0.35) 0%, rgba(184, 93, 52, 0.15) 45%, transparent 75%)
           `
         }}
       />
 
-      {/* 4. Pulsing Atmospheric Ambient Orbs (Responsive Mobile Scaling) */}
-      <div className="absolute -top-16 -left-16 w-[320px] h-[320px] sm:w-[600px] sm:h-[600px] bg-[#2b8057]/45 rounded-full blur-[80px] sm:blur-[100px] animate-pulse-glow" />
-      <div className="absolute top-1/4 -right-16 w-[340px] h-[340px] sm:w-[650px] sm:h-[650px] bg-[#d4a359]/35 rounded-full blur-[90px] sm:blur-[110px] animate-float-reverse" />
-      <div className="absolute -bottom-16 left-1/4 w-[360px] h-[300px] sm:w-[680px] sm:h-[520px] bg-[#c25d33]/25 rounded-full blur-[80px] sm:blur-[100px] animate-float-slow" />
+      {/* 4. Pulsing Atmospheric Ambient Orbs (Pastel Glowing Accents) */}
+      <div className="absolute -top-16 -left-16 w-[320px] h-[320px] sm:w-[600px] sm:h-[600px] bg-[#10b981]/15 rounded-full blur-[80px] sm:blur-[100px] animate-pulse-glow" />
+      <div className="absolute top-1/4 -right-16 w-[340px] h-[340px] sm:w-[650px] sm:h-[650px] bg-[#d4a359]/25 rounded-full blur-[90px] sm:blur-[110px] animate-float-reverse" />
+      <div className="absolute -bottom-16 left-1/4 w-[360px] h-[300px] sm:w-[680px] sm:h-[520px] bg-[#b85d34]/15 rounded-full blur-[80px] sm:blur-[100px] animate-float-slow" />
 
       {/* 5. Sacred Islamic Geometric Wireframe (Top-Right Astrolabe - Mobile Clamped) */}
       <div className="absolute -top-12 -right-12 sm:-top-24 sm:right-4 lg:right-8 w-[240px] h-[240px] sm:w-[700px] sm:h-[700px] pointer-events-none opacity-20 sm:opacity-85 animate-spin-slow overflow-hidden">
@@ -211,36 +211,36 @@ export default function AnimatedHeroBackground() {
       </div>
 
       {/* 8. Floating Educational Knowledge Motifs */}
-      <div className="absolute top-24 left-[3%] animate-float-slow hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-[#0c2217]/85 border border-[#d4a359]/40 text-[#faf8f5] shadow-[0_8px_30px_rgba(212,163,89,0.2)] backdrop-blur-md">
-        <div className="p-1.5 bg-[#d4a359]/20 text-[#d4a359] rounded-xl">
+      <div className="absolute top-24 left-[3%] animate-float-slow hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-white/85 border border-[#d4a359]/40 text-[#0c311e] shadow-[0_8px_30px_rgba(12,49,30,0.08)] backdrop-blur-md">
+        <div className="p-1.5 bg-[#d4a359]/20 text-[#b85d34] rounded-xl">
           <BookOpen className="w-4 h-4" />
         </div>
         <div className="text-left">
-          <span className="text-[11px] font-bold block text-white">Quran &amp; Tajweed</span>
-          <span className="text-[9px] text-[#d4a359] block font-mono">Wafaq Alimah &amp; Qari</span>
+          <span className="text-[11px] font-bold block text-[#0c311e]">Quran &amp; Tajweed</span>
+          <span className="text-[9px] text-[#b85d34] block font-mono">Wafaq Alimah &amp; Qari</span>
         </div>
       </div>
 
-      <div className="absolute top-20 right-[4%] animate-float-reverse hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-[#0c2217]/85 border border-[#d4a359]/40 text-[#faf8f5] shadow-[0_8px_30px_rgba(212,163,89,0.2)] backdrop-blur-md">
-        <div className="p-1.5 bg-[#b85d34]/20 text-[#d4a359] rounded-xl">
+      <div className="absolute top-20 right-[4%] animate-float-reverse hidden lg:flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-white/85 border border-[#d4a359]/40 text-[#0c311e] shadow-[0_8px_30px_rgba(12,49,30,0.08)] backdrop-blur-md">
+        <div className="p-1.5 bg-[#b85d34]/20 text-[#b85d34] rounded-xl">
           <GraduationCap className="w-4 h-4" />
         </div>
         <div className="text-left">
-          <span className="text-[11px] font-bold block text-white">Cambridge &amp; Matric</span>
-          <span className="text-[9px] text-[#d4a359] block font-mono">Pre-Medical &amp; Pre-Eng</span>
+          <span className="text-[11px] font-bold block text-[#0c311e]">Cambridge &amp; Matric</span>
+          <span className="text-[9px] text-[#b85d34] block font-mono">Pre-Medical &amp; Pre-Eng</span>
         </div>
       </div>
 
-      <div className="absolute bottom-28 left-[5%] animate-float-reverse hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-[#0c2217]/85 border border-[#d4a359]/35 text-[#d4a359] shadow-lg backdrop-blur-md">
+      <div className="absolute bottom-28 left-[5%] animate-float-reverse hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white/85 border border-[#d4a359]/35 text-[#0c311e] shadow-md backdrop-blur-md">
         <Award className="w-3.5 h-3.5 text-[#d4a359]" />
-        <span className="text-[10px] font-bold text-stone-200">Verified Sanad Degrees</span>
+        <span className="text-[10px] font-bold text-[#0c311e]">Verified Sanad Degrees</span>
       </div>
 
       {/* 9. Arabesque Sacred Geometric Dot Watermark */}
-      <div className="absolute inset-0 bg-[radial-gradient(#d4a359_1px,transparent_1px)] [background-size:28px_28px] opacity-25" />
+      <div className="absolute inset-0 bg-[radial-gradient(#d4a359_1px,transparent_1px)] [background-size:28px_28px] opacity-15" />
 
       {/* 10. Soft Vignette Edge Blending */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0c2217] via-transparent to-[#07150e]/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#e4eee6]/60 via-transparent to-white/40 pointer-events-none" />
     </div>
   );
 }
