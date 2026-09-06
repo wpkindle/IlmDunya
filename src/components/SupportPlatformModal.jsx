@@ -70,9 +70,9 @@ export default function SupportPlatformModal({ isOpen, onClose }) {
   const selectedMethod = paymentMethods.find((m) => m.id === activeTab) || paymentMethods[0];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#0c311e]/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-[#0c311e]/60 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="w-full max-w-lg max-h-[92dvh] sm:max-h-[90dvh] flex flex-col rounded-t-[28px] sm:rounded-3xl bg-white border-t-2 sm:border-2 border-[#d4a359]/60 shadow-2xl text-[#1a3325] relative overflow-hidden"
+        className="w-full max-w-lg max-h-[92dvh] sm:max-h-[90dvh] flex flex-col rounded-3xl bg-white border-2 border-[#d4a359]/60 shadow-2xl text-[#1a3325] relative overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
