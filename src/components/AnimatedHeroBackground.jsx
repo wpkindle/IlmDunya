@@ -61,10 +61,10 @@ export default function AnimatedHeroBackground() {
       aria-hidden="true"
     >
       {/* 1. Light & Pristine Base Tones */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f8faf8] via-[#edf5ef] to-[#e4eee6]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fcfdfc] to-[#f7faf8]" />
 
       {/* 2. Dynamic Moving Aurora Multi-Gradient Layer (Soft Luminous Shimmer) */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#d1fae5]/70 via-[#fef9c3]/60 to-[#dcfce7]/60 animate-aurora opacity-75 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#d1fae5]/40 via-[#fef9c3]/35 to-[#dcfce7]/35 animate-aurora opacity-60" />
 
       {/* 3. Luminous Interactive Mouse Spotlight (Warm golden lantern effect) */}
       <div
@@ -240,7 +240,7 @@ export default function AnimatedHeroBackground() {
       <div className="absolute inset-0 bg-[radial-gradient(#d4a359_1px,transparent_1px)] [background-size:28px_28px] opacity-15" />
 
       {/* 10. Soft Vignette Edge Blending */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#e4eee6]/60 via-transparent to-white/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-white/40 pointer-events-none" />
     </div>
   );
 }

@@ -59,7 +59,7 @@ export default function App() {
   const whatsappUrl = "https://wa.me/923171759093?text=Salam%20IlmiDunya!%20I%20am%20interested%20in%20learning%20more%20about%20the%20platform.";
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#f8faf8] via-[#f1f6f2] to-[#e8f1ea] text-[#1a3325] overflow-x-hidden w-full max-w-full flex flex-col justify-between">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#ffffff] via-[#fcfdfc] to-[#f7faf8] text-[#1a3325] overflow-x-hidden w-full max-w-full flex flex-col justify-between">
       {/* 1. EXACT ANIMATED HERO BACKGROUND EFFECT FROM MAIN WEBSITE */}
       <AnimatedHeroBackground />
 
@@ -185,7 +185,7 @@ export default function App() {
         </div>
 
         {/* STUDENT REGISTRATION WILL START SOON ANNOUNCEMENT CARD */}
-        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-14 p-5 sm:p-6 rounded-3xl glass-card border-2 border-[#d4a359]/70 shadow-xl bg-gradient-to-b from-white/95 to-[#f3f9f4]/98 text-center space-y-3 relative overflow-hidden">
+        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-14 p-5 sm:p-6 rounded-3xl glass-card border-2 border-[#d4a359]/70 shadow-xl bg-white/95 text-center space-y-3 relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#d4a359]/20 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute -bottom-12 -left-12 w-36 h-36 bg-[#b85d34]/15 rounded-full blur-2xl pointer-events-none" />
 
@@ -418,7 +418,7 @@ export default function App() {
       </div>
 
       {/* Footer (Optimized for Mobile & Desktop with Floating Button Safe Clearance) */}
-      <footer className="relative z-20 border-t border-[#d4a359]/30 bg-[#edf4ee] pt-8 pb-24 sm:pt-10 sm:pb-28 text-center">
+      <footer className="relative z-20 border-t border-[#d4a359]/30 bg-[#fafaf9] pt-8 pb-24 sm:pt-10 sm:pb-28 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center gap-3 text-xs text-[#375242]">
           {/* Brand Logo & Authentic Urdu Script */}
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
