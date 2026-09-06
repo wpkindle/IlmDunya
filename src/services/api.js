@@ -28,11 +28,22 @@ const handleResponse = async (response) => {
 export const api = {
   registerTutor: async (body) => {
     try {
-      const res = await fetch(`${API_BASE}/auth/register`, {
+      // First attempt dedicated /auth/early-tutor endpoint (no OTP required)
+      let res = await fetch(`${API_BASE}/auth/early-tutor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...body, role: 'tutor' })
       });
+
+      // If backend is rolling update and early-tutor is not yet live (404), fallback to /auth/register
+      if (res.status === 404) {
+        res = await fetch(`${API_BASE}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...body, role: 'tutor' })
+        });
+      }
+
       return await handleResponse(res);
     } catch (err) {
       if (err.message && err.message.includes('Failed to fetch')) {
