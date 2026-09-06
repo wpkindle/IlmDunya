@@ -64,11 +64,11 @@ export default function App() {
       <AnimatedHeroBackground />
 
       {/* Top Header Navigation (Mobile Optimized & Light Illuminated) */}
-      <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/30 bg-white/85 backdrop-blur-md shadow-xs overflow-x-hidden">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+      <header className="relative z-20 w-full max-w-full border-b border-[#d4a359]/30 bg-white/90 backdrop-blur-md shadow-xs overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Authentic Brand Logo */}
-          <a href="/" className="flex items-center group py-1 shrink-0" title="IlmiDunya">
-            <BrandLogo variant="light" size="sm" />
+          <a href="/" className="flex items-center group py-0.5 shrink-0" title="IlmiDunya">
+            <BrandLogo variant="light" size="md" />
           </a>
 
           {/* Action Buttons: Tutor Registration (Hidden on Mobile), Support Platform & WhatsApp Contact */}
