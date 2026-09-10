@@ -72,7 +72,7 @@ export default function SupportPlatformModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-black/35 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className="w-full max-w-lg max-h-[92dvh] sm:max-h-[90dvh] flex flex-col rounded-3xl bg-white border-2 border-[#d4a359]/60 shadow-2xl text-[#1a3325] relative overflow-hidden"
+        className="w-full max-w-xl max-h-[92dvh] sm:max-h-[90dvh] flex flex-col rounded-3xl bg-white border-2 border-[#d4a359]/60 shadow-2xl text-[#1a3325] relative overflow-hidden"
         role="dialog"
         aria-modal="true"
       >
