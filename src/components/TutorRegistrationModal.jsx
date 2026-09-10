@@ -3,7 +3,6 @@ import {
   UserCheck,
   X,
   Mail,
-  Phone,
   User,
   MapPin,
   BookOpen,
@@ -23,7 +22,6 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
   // Form State
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("male");
   const [city, setCity] = useState("");
   const [primarySubject, setPrimarySubject] = useState("");
@@ -44,8 +42,6 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
       const payload = {
         name: name.trim(),
         email: email.trim().toLowerCase(),
-        phone: phone.trim(),
-        number: phone.trim(),
         password: "IlmDunya2026!",
         role: "tutor",
         gender,
@@ -153,7 +149,7 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                 </div>
 
                 {/* Email Address */}
-                <div className="space-y-1">
+                <div className="space-y-1 sm:col-span-2">
                   <label className="text-[11px] font-bold text-[#0c311e] block">
                     Email Address *
                   </label>
@@ -165,24 +161,6 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-[#c8dcd0] focus:border-[#d4a359] focus:outline-none text-[#0c311e] text-xs placeholder:text-stone-400 shadow-2xs"
-                    />
-                  </div>
-                </div>
-
-                {/* WhatsApp Phone */}
-                <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-[#0c311e] block">
-                    WhatsApp Phone Number *
-                  </label>
-                  <div className="relative">
-                    <Phone className="w-4 h-4 text-[#4e755e] absolute left-3 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="tel"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="Enter your whatsapp or phone number"
                       className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-[#c8dcd0] focus:border-[#d4a359] focus:outline-none text-[#0c311e] text-xs placeholder:text-stone-400 shadow-2xs"
                     />
                   </div>
@@ -334,8 +312,8 @@ export default function TutorRegistrationModal({ isOpen, onClose }) {
                     <strong className="text-[#0c311e]">{city || "Online"}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-stone-500 block">WhatsApp:</span>
-                    <strong className="text-[#0c311e]">{phone}</strong>
+                    <span className="text-[10px] text-stone-500 block">Email:</span>
+                    <strong className="text-[#0c311e] truncate block">{email}</strong>
                   </div>
                   <div>
                     <span className="text-[10px] text-stone-500 block">Subject / Teaching:</span>
