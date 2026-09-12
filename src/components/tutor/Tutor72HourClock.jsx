@@ -1,0 +1,190 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { Clock, AlertCircle, CheckCircle2, CreditCard, ShieldCheck, Sparkles, Upload } from 'lucide-react';
+
+export default function Tutor72HourClock({ deal, onPayClick, className = '' }) {
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 72,
+    minutes: 0,
+    seconds: 0,
+    isOverdue: false,
+    formatted: '72h 00m 00s'
+  });
+
+  useEffect(() => {
+    if (!deal) return;
+
+    // Calculate due date (72 hours from deal start)
+    const dueDate = deal.tutorFeeDueDate
+      ? new Date(deal.tutorFeeDueDate)
+      : deal.trialEndDate
+      ? new Date(deal.trialEndDate)
+      : new Date(new Date(deal.trialStartDate || deal.continuationAgreedAt || deal.createdAt || Date.now()).getTime() + 72 * 60 * 60 * 1000);
+
+    const updateTimer = () => {
+      const now = new Date();
+      const diff = dueDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setTimeLeft({
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          isOverdue: true,
+          formatted: '00h 00m 00s (Expired)'
+        });
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const pad = (n) => String(n).padStart(2, '0');
+      setTimeLeft({
+        hours,
+        minutes,
+        seconds,
+        isOverdue: false,
+        formatted: `${hours}h ${pad(minutes)}m ${pad(seconds)}s`
+      });
+    };
+
+    updateTimer();
+    const timer = setInterval(updateTimer, 1000);
+    return () => clearInterval(timer);
+  }, [deal]);
+
+  if (!deal) return null;
+
+  // Case 1: Platform fee paid and verified by administration
+  if (deal.tutorFeePaid || deal.paymentStatus === 'verified') {
+    return (
+      <div className={`p-3 bg-[#f0ece1] border border-[#d4a359]/40 rounded-2xl flex items-center justify-between text-xs text-[#0c2217] shadow-2xs ${className}`}>
+        <div className="flex items-center gap-2">
+          <div className="p-1 bg-[#d4a359]/20 text-[#0c2217] rounded-lg">
+            <CheckCircle2 className="w-4 h-4 text-[#d4a359]" />
+          </div>
+          <div>
+            <span className="font-bold">Platform Fee Cleared &amp; Verified</span>
+            <p className="text-[11px] text-[#0c2217]/80">Full unrestricted access active for chat and video classroom.</p>
+          </div>
+        </div>
+        <span className="px-2.5 py-1 bg-[#0c2217] text-[#faf8f5] border border-[#d4a359]/40 font-bold text-[10px] rounded-full uppercase tracking-wider">
+          Permanent Access
+        </span>
+      </div>
+    );
+  }
+
+  // Case 2: Payment proof submitted, waiting for admin approval
+  if (deal.paymentStatus === 'submitted_proof' || deal.tutorPaymentProofReference) {
+    return (
+      <div className={`p-3.5 bg-gradient-to-r from-amber-50 via-[#f0ece1]/60 to-orange-50 border border-amber-300 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-amber-950 shadow-2xs ${className}`}>
+        <div className="flex items-center gap-2.5">
+          <Clock className="w-4 h-4 text-amber-600 animate-pulse shrink-0" />
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-amber-950">Payment Proof Under Review</span>
+              <span className="px-2 py-0.5 bg-amber-200 text-amber-950 text-[10px] font-bold rounded-full border border-amber-300">
+                Under Admin Review
+              </span>
+            </div>
+            <p className="text-[11px] text-amber-800 mt-0.5">
+              Ref: <strong className="font-mono">{deal.tutorPaymentProofReference || deal.paymentProofReference}</strong> &bull; Administration is reviewing your screenshot verification.
+            </p>
+          </div>
+        </div>
+
+        {onPayClick && (
+          <button
+            type="button"
+            onClick={onPayClick}
+            className="px-3 py-1.5 bg-[#0c2217] hover:bg-[#143d2b] text-white font-bold text-xs rounded-xl shadow-xs flex items-center gap-1.5 transition-all cursor-pointer border border-[#d4a359]/30 shrink-0"
+          >
+            <Upload className="w-3.5 h-3.5 text-[#d4a359]" />
+            <span>Submit Again</span>
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  // Case 3: Overdue (72 Hours Passed without payment) -> RESTRICTION ACTIVE!
+  if (timeLeft.isOverdue && !deal.tutorFeePaid) {
+    const feeDisplay = deal.platformFee ? `PKR ${deal.platformFee.toLocaleString()}` : 'Admin Custom Fee';
+
+    return (
+      <div className={`p-3.5 bg-rose-50 border border-rose-300 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-rose-950 shadow-2xs animate-in fade-in ${className}`}>
+        <div className="flex items-center gap-2.5">
+          <div className="p-1.5 bg-rose-100 text-rose-700 rounded-xl shrink-0">
+            <AlertCircle className="w-5 h-5 text-rose-600" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-black text-rose-900">72-Hour Platform Fee Clock Expired</span>
+              <span className="px-2 py-0.5 bg-rose-600 text-white font-black text-[9px] rounded-full uppercase tracking-wider animate-pulse">
+                Access Restricted
+              </span>
+            </div>
+            <p className="text-[11px] text-rose-700 mt-0.5 leading-relaxed">
+              The 72-hour window has passed without payment verification. <strong>Chat and video classroom are paused</strong> until the platform fee ({feeDisplay}) is cleared with admin.
+            </p>
+          </div>
+        </div>
+
+        {onPayClick && (
+          <button
+            type="button"
+            onClick={onPayClick}
+            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shadow-md flex items-center gap-1.5 shrink-0 transition-all cursor-pointer hover:scale-105"
+          >
+            <CreditCard className="w-3.5 h-3.5" />
+            <span>Pay Platform Fee</span>
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  // Case 4: Active within 72 Hours Grace Period -> FULL ACCESS ACTIVE!
+  const feeDisplay = deal.platformFee ? `PKR ${deal.platformFee.toLocaleString()}` : 'Platform Fee';
+
+  return (
+    <div className={`p-3.5 bg-gradient-to-r from-amber-50/80 via-[#f0ece1]/60 to-orange-50/80 border border-[#d4a359]/50 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-2xs ${className}`}>
+      <div className="flex items-center gap-3">
+        <div className="p-2 bg-amber-100 text-amber-900 rounded-xl shrink-0 relative">
+          <Clock className="w-5 h-5 text-amber-700 animate-spin" style={{ animationDuration: '8s' }} />
+        </div>
+        <div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-black text-slate-900">72-Hour Clearance Clock:</span>
+            <span className="px-2.5 py-0.5 bg-amber-500 text-slate-950 font-mono font-black text-xs rounded-lg shadow-2xs tracking-wider">
+              ⏳ {timeLeft.formatted}
+            </span>
+            <span className="px-2 py-0.5 bg-[#f0ece1] text-[#0c2217] border border-[#d4a359]/40 font-bold text-[9px] rounded-full uppercase tracking-wider">
+              Full Access Active (Chat &amp; Video)
+            </span>
+          </div>
+          <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+            You have full access to chat and join live video classes during this 72-hour window. Please clear the platform fee ({feeDisplay}) before the timer expires.
+          </p>
+        </div>
+      </div>
+
+      {onPayClick && (
+        <button
+          type="button"
+          onClick={onPayClick}
+          className="px-4 py-2 bg-[#b85d34] hover:bg-[#9e4e2a] text-white font-black text-xs rounded-xl shadow-md flex items-center gap-1.5 shrink-0 transition-all cursor-pointer hover:scale-105"
+        >
+          <CreditCard className="w-3.5 h-3.5" />
+          <span>Clear Fee Now</span>
+        </button>
+      )}
+    </div>
+  );
+}
+

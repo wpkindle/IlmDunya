@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -20,6 +23,20 @@ export default {
           900: '#020704',
           950: '#010302',
         },
+        cream: {
+          50: '#fdfcfb',
+          100: '#faf8f5',
+          200: '#f5f0e6',
+          300: '#ebe3d3',
+          400: '#decfae',
+        },
+        sand: {
+          50: '#fcfbf9',
+          100: '#f8f5ee',
+          200: '#ede6d8',
+          300: '#dfd4be',
+          800: '#5e4e37',
+        },
         terracotta: {
           50: '#fdf5f2',
           100: '#fae7e1',
@@ -27,36 +44,26 @@ export default {
           600: '#9e4e2a',
           700: '#813f21',
         },
+        ink: {
+          400: '#81928e',
+          500: '#5c6e69',
+          700: '#2d3a37',
+          800: '#1c2826',
+          900: '#141c19',
+        },
         gold: {
           400: '#fbbf24',
           500: '#f59e0b',
           600: '#d97706',
           700: '#b45309',
-        },
-        brand: {
-          teal: '#15a18d',
-          'teal-light': '#18b8a2',
-          'teal-dark': '#0f7d6e',
-          charcoal: '#373737',
-          rust: '#c25d33'
         }
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-        urdu: ['"Noto Nastaliq Urdu"', '"Amiri"', 'serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         arabic: ['Amiri', 'Traditional Arabic', 'serif'],
       },
-      animation: {
-        'float-slow': 'floatSlow 8s ease-in-out infinite',
-        'float-reverse': 'floatReverse 9s ease-in-out infinite',
-        'aurora': 'auroraWave 12s ease infinite',
-        'pulse-glow': 'pulseGlow 6s ease-in-out infinite',
-        'spin-slow': 'spinSlow 30s linear infinite',
-        'spin-reverse': 'spinSlowReverse 35s linear infinite',
-        'particle-drift': 'particleDrift 9s ease-in-out infinite',
-        'geometric-pulse': 'geometricPulse 10s ease-in-out infinite',
-      }
     },
   },
   plugins: [],
-}
+};

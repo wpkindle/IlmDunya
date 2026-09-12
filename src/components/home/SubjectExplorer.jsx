@@ -1,0 +1,193 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import {
+  BookOpen,
+  BookMarked,
+  Award,
+  Code,
+  Languages,
+  ShieldCheck,
+  ArrowRight,
+  Sparkles,
+  Users,
+  GraduationCap
+} from 'lucide-react';
+import { api } from '../../services/api';
+
+const iconMap = {
+  BookOpen,
+  BookMarked,
+  Award,
+  Code,
+  Languages,
+  ShieldCheck,
+  Users,
+  GraduationCap
+};
+
+const SubjectExplorer = () => {
+  const [categories, setCategories] = useState([]);
+  const [activeTab, setActiveTab] = useState('quran');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCats = async () => {
+      try {
+        const res = await api.getCategories();
+        if (res.success) setCategories(res.categories);
+      } catch (err) {
+        console.error('Error loading categories:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCats();
+  }, []);
+
+  const filteredCategories = categories.filter(c => c.type === activeTab);
+
+  return (
+    <section className="py-16 sm:py-24 relative overflow-hidden bg-section-subjects border-b border-[#ebe3d3]">
+      {/* Precision architectural grid overlay */}
+      <div className="absolute inset-0 architectural-grid opacity-40 pointer-events-none" />
+
+      {/* Subtle top accent line */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#d4a359]/35 to-transparent pointer-events-none" />
+
+      {/* Animated floating ambient glows */}
+      <div className="absolute top-1/4 -left-20 w-[450px] h-[450px] bg-[#10b981]/6 rounded-full blur-[130px] pointer-events-none animate-float-slow" />
+      <div className="absolute bottom-10 -right-20 w-[520px] h-[520px] bg-[#d4a359]/9 rounded-full blur-[140px] pointer-events-none animate-float-reverse" />
+
+
+      {/* Precision architectural coordinate crosshairs */}
+      <div className="hidden sm:block absolute top-6 left-6 text-[#d4a359]/40 font-mono text-[10px] pointer-events-none select-none">+</div>
+      <div className="hidden sm:block absolute top-6 right-6 text-[#d4a359]/40 font-mono text-[10px] pointer-events-none select-none">+</div>
+      <div className="hidden sm:block absolute bottom-6 left-6 text-[#10b981]/40 font-mono text-[10px] pointer-events-none select-none">+</div>
+      <div className="hidden sm:block absolute bottom-6 right-6 text-[#10b981]/40 font-mono text-[10px] pointer-events-none select-none">+</div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
+        
+        {/* Editorial Header & Stream Switcher */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ebe3d3] text-[#143d2b] text-xs font-bold shadow-2xs">
+              <BookOpen className="w-3.5 h-3.5 text-[#d4a359]" />
+              <span>Curriculum &amp; Disciplines</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-black text-[#141c19] tracking-tight leading-[1.15]">
+              Two paths: Sacred Quranic sciences &amp; academic excellence.
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5c6e69] leading-relaxed">
+              From gentle Noorani Qaida for young children to rigorous Federal and Provincial Board prep (Matric &amp; FSc), find specialized educators for every milestone.
+            </p>
+          </div>
+
+          {/* Stream Switcher Tabs */}
+          <div className="flex items-center gap-1.5 bg-[#ebe3d3] p-1.5 rounded-2xl text-xs font-bold self-start md:self-auto shrink-0 shadow-inner">
+            <button
+              onClick={() => setActiveTab('quran')}
+              className={`px-4 py-2 rounded-xl transition-all cursor-pointer ${
+                activeTab === 'quran'
+                  ? 'bg-[#b85d34] text-white shadow-sm'
+                  : 'text-[#2d3a37] hover:text-[#141c19]'
+              }`}
+            >
+              Quran &amp; Islamic Sciences
+            </button>
+            <button
+              onClick={() => setActiveTab('academic')}
+              className={`px-4 py-2 rounded-xl transition-all cursor-pointer ${
+                activeTab === 'academic'
+                  ? 'bg-[#b85d34] text-white shadow-sm'
+                  : 'text-[#2d3a37] hover:text-[#141c19]'
+              }`}
+            >
+              School &amp; College Academics
+            </button>
+          </div>
+        </div>
+
+        {/* Course Section Banner */}
+        <div className="p-6 rounded-3xl bg-white text-[#141c19] border-2 border-[#d4a359]/50 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#f5f0e6] border border-[#d4a359]/40 flex items-center justify-center shrink-0">
+              <Sparkles className="w-6 h-6 text-[#b85d34]" />
+            </div>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-wider text-[#b85d34] bg-[#f5f0e6] px-2.5 py-0.5 rounded border border-[#ebe3d3]">
+                Launching Soon
+              </span>
+              <h3 className="text-base sm:text-lg font-serif font-black text-[#0c2217] mt-1">
+                Courses Portal Launching Soon
+              </h3>
+              <p className="text-xs text-[#52665b] leading-snug">
+                Structured curriculum roadmaps, interactive exercises, and milestone certificates are in active preparation.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/tutors"
+            className="px-5 py-2.5 rounded-xl bg-[#b85d34] hover:bg-[#9e4e2a] text-white font-bold text-xs shadow-md shrink-0 flex items-center gap-2 transition-all cursor-pointer"
+          >
+            <span>Explore Verified Tutors</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredCategories.map((cat) => {
+            const IconComponent = iconMap[cat.icon] || BookOpen;
+            return (
+              <Link
+                key={cat._id}
+                href={`/tutors?category=${cat.slug}`}
+                className="group bg-[#faf8f5] p-6 rounded-3xl border border-[#ebe3d3] hover:border-[#143d2b] shadow-2xs hover:shadow-lg transition-all space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="p-3 bg-[#f5f0e6] text-[#143d2b] rounded-2xl w-fit group-hover:bg-[#143d2b] group-hover:text-white transition-all">
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-[#141c19] group-hover:text-[#143d2b] transition-colors">
+                      {cat.name}
+                    </h3>
+                    <p className="text-xs text-[#5c6e69] mt-1 leading-relaxed line-clamp-2">
+                      {cat.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-3 border-t border-[#ebe3d3]/80">
+                  {cat.subtopics && cat.subtopics.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {cat.subtopics.slice(0, 3).map((st, sidx) => (
+                        <span key={sidx} className="text-[10px] font-semibold bg-[#f0ece1] text-[#2d3a37] px-2 py-0.5 rounded-md">
+                          {st}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between text-xs font-bold text-[#143d2b] pt-1">
+                    <span>Find Verified Tutors</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+      </div>
+
+      {/* Subtle Bottom Accent Ribbon */}
+      <div className="absolute inset-x-0 bottom-0 section-divider-ribbon-subtle" />
+    </section>
+  );
+};
+
+export default SubjectExplorer;

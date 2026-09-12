@@ -1,0 +1,594 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    max-width: 100vw;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent iOS automatic zoom on focus while maintaining touch target compliance */
+  @media screen and (max-width: 640px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* Mobile Safe Area & Viewport Utilities */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 12px);
+}
+.h-dvh {
+  height: 100dvh;
+}
+.min-h-dvh {
+  min-height: 100dvh;
+}
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Performance safeguard for low-end devices and battery saver */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Islamic pattern background and modern accents */
+.bg-islamic-pattern {
+  background-color: #0c2217;
+  background-image: radial-gradient(#1e543c 0.75px, transparent 0.75px), radial-gradient(#1e543c 0.75px, #0c2217 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.bg-subtle-pattern {
+  background-image: radial-gradient(#d6cec0 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+}
+
+/* Warm Parchment Subtle Grain */
+.bg-parchment-grain {
+  background-color: #faf8f5;
+  background-image: radial-gradient(#e7ded0 0.65px, transparent 0.65px);
+  background-size: 16px 16px;
+}
+
+/* Editorial Hand-Drawn Underline */
+.hand-drawn-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.14em;
+}
+.hand-drawn-underline::after {
+  content: '';
+  position: absolute;
+  left: -1%;
+  bottom: -0.06em;
+  width: 102%;
+  height: 0.22em;
+  min-height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 16' preserveAspectRatio='none'%3E%3Cpath d='M3 11 C 60 4, 140 14, 247 6' stroke='%23b85d34' stroke-width='3.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.hand-drawn-underline-gold {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.14em;
+}
+.hand-drawn-underline-gold::after {
+  content: '';
+  position: absolute;
+  left: -1%;
+  bottom: -0.06em;
+  width: 102%;
+  height: 0.22em;
+  min-height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 16' preserveAspectRatio='none'%3E%3Cpath d='M3 11 C 60 4, 140 14, 247 6' stroke='%23d97706' stroke-width='3.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Subtle Arabesque Section Motif Divider */
+.divider-arabesque {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='16' viewBox='0 0 40 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L24 8 L20 16 L16 8 Z M8 8 L12 4 L16 8 L12 12 Z M32 8 L36 4 L40 8 L36 12 Z' fill='%23c8933b' fill-opacity='0.25'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 16px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%) scaleX(0.2);
+  }
+  50% {
+    transform: translateX(0%) scaleX(0.7);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.2);
+  }
+}
+
+.animate-indeterminate {
+  animation: indeterminate 1.4s infinite ease-in-out;
+  transform-origin: 0% 50%;
+}
+
+/* Cinematic Ken-Burns Pan & Zoom Animations */
+@keyframes kenburns-zoom-in {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+@keyframes kenburns-zoom-out {
+  0% {
+    transform: scale(1.12) translate3d(-1%, 1%, 0);
+  }
+  100% {
+    transform: scale(1.02) translate3d(1%, -0.5%, 0);
+  }
+}
+
+.animate-kenburns-1 {
+  animation: kenburns-zoom-in 9s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+  will-change: transform;
+}
+
+.animate-kenburns-2 {
+  animation: kenburns-zoom-out 9s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns-1,
+  .animate-kenburns-2 {
+    animation: none !important;
+    transform: scale(1.03) !important;
+  }
+}
+
+/* Vivid Aurora & Hero Float Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-24px) rotate(4deg) scale(1.04);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(22px) rotate(-5deg) scale(0.96);
+  }
+}
+
+@keyframes auroraWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinSlowReverse {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes radarWave {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes dashFlow {
+  0% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 9s ease-in-out infinite;
+}
+
+.animate-aurora {
+  background-size: 200% 200%;
+  animation: auroraWave 12s ease infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 30s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spinSlowReverse 35s linear infinite;
+}
+
+.animate-radar {
+  animation: radarWave 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes particleDrift {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.45;
+  }
+  35% {
+    transform: translateY(-28px) translateX(14px) scale(1.35);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-56px) translateX(-12px) scale(0.95);
+    opacity: 0.65;
+  }
+}
+
+.animate-particle-drift {
+  animation: particleDrift 9s ease-in-out infinite;
+}
+
+@keyframes geometricPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.04);
+  }
+}
+
+.animate-geometric-pulse {
+  animation: geometricPulse 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-aurora,
+  .animate-pulse-glow,
+  .animate-spin-slow,
+  .animate-spin-reverse,
+  .animate-radar,
+  .animate-particle-drift,
+  .animate-geometric-pulse {
+    animation: none !important;
+  }
+}
+
+/* Distinct Section Background Pattern Presets */
+.bg-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-dot-matrix {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Precision Architectural Grid with Elliptical Radial Mask */
+.architectural-grid {
+  background-image: 
+    linear-gradient(to right, rgba(12, 34, 23, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(12, 34, 23, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, black 20%, transparent 85%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, black 20%, transparent 85%);
+}
+
+/* Luminous Multi-Color Section Divider Ribbon */
+.section-divider-ribbon {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 163, 89, 0.2) 15%, rgba(212, 163, 89, 0.85) 50%, rgba(16, 185, 129, 0.6) 80%, transparent 100%);
+}
+
+.section-divider-ribbon-subtle {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 163, 89, 0.4) 30%, rgba(16, 185, 129, 0.35) 70%, transparent 100%);
+}
+
+/* Rich Dark Islamic Geometry Pattern for Footer */
+.footer-dark-pattern {
+  background-color: #081a11;
+  background-image: 
+    radial-gradient(rgba(212, 163, 89, 0.16) 1px, transparent 1px),
+    radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px, 56px 56px;
+  background-position: 0 0, 14px 14px;
+}
+
+.bg-honeycomb-dark {
+  background-color: #090e17;
+  background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1.5px, transparent 1.5px), radial-gradient(rgba(20, 184, 166, 0.08) 1.5px, #090e17 1.5px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.bg-islamic-geometry-light {
+  background-image: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.07) 1px, transparent 1px),
+                    radial-gradient(circle at 0% 0%, rgba(245, 158, 11, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px;
+}
+
+/* Subtle Card Elevation Utilities (Gentle Zoom, Non-3D) */
+.card-hover-subtle {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-subtle:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px -6px rgba(12, 34, 23, 0.08);
+}
+
+/* ─── Clean, Decent Section Background Gradients ─────────────────────────── */
+
+/* Global Site Canvas: Deep multi-layered ambient gradient mesh */
+.bg-site-canvas {
+  background-color: #faf6ef;
+  background-image: 
+    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(212, 163, 89, 0.12), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 90% 20%, rgba(16, 185, 129, 0.08), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 10% 45%, rgba(212, 163, 89, 0.09), transparent 65%),
+    radial-gradient(ellipse 80% 50% at 85% 75%, rgba(16, 185, 129, 0.07), transparent 60%),
+    radial-gradient(ellipse 90% 60% at 50% 100%, rgba(184, 93, 52, 0.06), transparent 70%),
+    linear-gradient(180deg, #fdfbf7 0%, #faf5ec 25%, #f6f0e4 50%, #f7f2ea 75%, #f4eee2 100%);
+  background-attachment: fixed;
+}
+
+/* 1. Hero: Pure ivory melting into soft warm parchment with golden peaks */
+.bg-section-hero {
+  background: 
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(212, 163, 89, 0.12), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 15% 45%, rgba(16, 185, 129, 0.08), transparent 60%),
+    linear-gradient(180deg, #fefdfb 0%, #faf5ec 48%, #f3ede0 100%);
+}
+
+/* 2. Safety & Trust: Gentle soft-sage/mint warmth with dual radial glows */
+.bg-section-safety {
+  background: 
+    radial-gradient(ellipse 65% 55% at 15% 30%, rgba(16, 185, 129, 0.10), transparent 70%),
+    radial-gradient(ellipse 55% 60% at 85% 70%, rgba(212, 163, 89, 0.11), transparent 70%),
+    linear-gradient(180deg, #f3ede0 0%, #edf7f0 50%, #f6f1e8 100%);
+}
+
+/* 3. Verified Tutors: Warm ivory with glowing gold and emerald halos */
+.bg-section-tutors {
+  background: 
+    radial-gradient(ellipse 65% 50% at 80% 25%, rgba(212, 163, 89, 0.13), transparent 65%),
+    radial-gradient(ellipse 50% 50% at 15% 75%, rgba(16, 185, 129, 0.08), transparent 65%),
+    linear-gradient(180deg, #f6f1e8 0%, #fdf9f2 50%, #f5eee2 100%);
+}
+
+/* 4. Subject Explorer: Warm honey-amber scholarship tone */
+.bg-section-subjects {
+  background: 
+    radial-gradient(ellipse 65% 55% at 20% 35%, rgba(212, 163, 89, 0.14), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 65%, rgba(184, 93, 52, 0.08), transparent 65%),
+    linear-gradient(180deg, #f5eee2 0%, #fef7ec 50%, #f4eee0 100%);
+}
+
+/* 5. City Coverage: Pale Pakistani green-tinged ivory */
+.bg-section-cities {
+  background: 
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(16, 185, 129, 0.11), transparent 70%),
+    radial-gradient(ellipse 55% 55% at 15% 70%, rgba(212, 163, 89, 0.10), transparent 70%),
+    linear-gradient(180deg, #f4eee0 0%, #eaf5ed 50%, #f4efe2 100%);
+}
+
+/* 6. How It Works: Warm, calm parchment with illuminated milestones */
+.bg-section-howitworks {
+  background: 
+    radial-gradient(ellipse 60% 50% at 25% 40%, rgba(212, 163, 89, 0.12), transparent 70%),
+    radial-gradient(ellipse 55% 50% at 85% 70%, rgba(16, 185, 129, 0.08), transparent 65%),
+    linear-gradient(180deg, #f4efe2 0%, #fbf5eb 50%, #f1ebd8 100%);
+}
+
+
+/* 8. FAQ: Warm golden parchment closing into the dark footer */
+.bg-section-faq {
+  background: 
+    radial-gradient(ellipse 60% 60% at 50% 30%, rgba(212, 163, 89, 0.13), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(16, 185, 129, 0.08), transparent 65%),
+    linear-gradient(180deg, #f6f2e8 0%, #faf3e8 55%, #eae0ce 100%);
+}
+
+/* Mobile Menu Open State: Lock body scroll & hide floating widgets / bottom navigation */
+body.mobile-menu-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+body.mobile-menu-open #mobile-bottom-nav,
+body.mobile-menu-open #ai-chatbot-widget-trigger,
+body.mobile-menu-open #support-platform-pill {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Live Chat Widget Open State: Lock body scroll & hide floating widgets / bottom navigation */
+body.chat-widget-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+body.chat-widget-open #mobile-bottom-nav,
+body.chat-widget-open #support-platform-pill {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Live Support Widget Attractor Bouncing & Glow Effects */
+@keyframes widgetFloatBounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-9px) scale(1.04);
+  }
+}
+
+.animate-widget-bounce {
+  animation: widgetFloatBounce 2.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes attractorHalo {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.85;
+  }
+}
+
+.animate-attractor-halo {
+  animation: attractorHalo 2.6s ease-in-out infinite;
+}
+
+@keyframes radarWave {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+.animate-radar-wave {
+  animation: radarWave 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+
+
+
+/* ── IlmiDunya brand spinner cornered-box keyframes ────────── */
+@keyframes ilmi-dash-sm {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -131.4; }
+}
+@keyframes ilmi-dash-md {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -249.66; }
+}
+@keyframes ilmi-dash-lg {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -331.36; }
+}
+.ilmi-arc-sm { animation: ilmi-dash-sm 1.1s linear infinite; }
+.ilmi-arc-md { animation: ilmi-dash-md 1.35s linear infinite; }
+.ilmi-arc-lg { animation: ilmi-dash-lg 1.55s linear infinite; }
+
+/* ── IlmiDunya brand spinner shimmer keyframe ─────────────── */
+@keyframes ilmi-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}

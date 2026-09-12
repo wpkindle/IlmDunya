@@ -1,0 +1,616 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import {
+  ShieldCheck,
+  Users,
+  BookOpen,
+  Clock,
+  CreditCard,
+  Video,
+  MessageSquare,
+  Sparkles,
+  AlertTriangle,
+  FileText,
+  ArrowRight,
+  CheckCircle2,
+  Check,
+  X,
+  Loader2,
+  Star,
+  Flag
+} from 'lucide-react';
+import { api } from '../../../services/api';
+import { useAuth } from '../../../context/AuthContext';
+import TrialBanner from '../../../components/common/TrialBanner';
+import Tutor72HourClock from '../../../components/tutor/Tutor72HourClock';
+import TutorPaymentModal from '../../../components/tutor/TutorPaymentModal';
+import LeaveReviewModal from '../../../components/common/LeaveReviewModal';
+import LoadingSpinner from '../../../components/common/LoadingSpinner';
+import AccountStatusBanner from '../../../components/common/AccountStatusBanner';
+import ReportReviewModal from '../../../components/common/ReportReviewModal';
+
+export default function TutorDashboardPage() {
+  const { user, tutorProfile } = useAuth();
+  const [deals, setDeals] = useState([]);
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedDealForPay, setSelectedDealForPay] = useState(null);
+  const [reviewModalDeal, setReviewModalDeal] = useState(null);
+  const [dealToComplete, setDealToComplete] = useState(null);
+  const [completionNotes, setCompletionNotes] = useState('');
+  const [completing, setCompleting] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+  const [reportModalOpen, setReportModalOpen] = useState(false);
+  const [selectedReviewToReport, setSelectedReviewToReport] = useState(null);
+  const [reportedReviewIds, setReportedReviewIds] = useState(new Set());
+
+  const fetchData = async () => {
+    try {
+      const [dealsRes, sessRes] = await Promise.all([
+        api.getMyDeals(),
+        api.getMySessions()
+      ]);
+      if (dealsRes.success) setDeals(dealsRes.deals);
+      if (sessRes.success) setSessions(sessRes.sessions);
+    } catch (err) {
+      console.error('Error fetching tutor dashboard:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCompleteDeal = async (e) => {
+    e.preventDefault();
+    if (!dealToComplete || completing) return;
+
+    const isCleared = Boolean(dealToComplete.tutorFeePaid || dealToComplete.paymentStatus === 'verified' || dealToComplete.platformFee === 0);
+    if (!isCleared) {
+      alert('Platform Payment Required: Please clear your platform fee or submit payment proof before marking this deal completed.');
+      setSelectedDealForPay(dealToComplete);
+      setDealToComplete(null);
+      return;
+    }
+
+    setCompleting(true);
+    setFeedback(null);
+    try {
+      const res = await api.completeDeal(dealToComplete._id, { notes: completionNotes.trim() });
+      setDealToComplete(null);
+      setCompletionNotes('');
+      setFeedback({
+        type: 'success',
+        message: res?.message || 'Deal completed successfully. Messages deleted to free storage.'
+      });
+      await fetchData();
+      setTimeout(() => setFeedback(null), 6000);
+    } catch (err) {
+      if (err.message && err.message.toLowerCase().includes('already')) {
+        setDealToComplete(null);
+        setCompletionNotes('');
+        setFeedback({
+          type: 'success',
+          message: 'Deal is marked as completed. Conversation messages removed to free storage.'
+        });
+        await fetchData();
+        setTimeout(() => setFeedback(null), 6000);
+      } else if (err.message && (err.message.toLowerCase().includes('platform fee') || err.message.toLowerCase().includes('cleared'))) {
+        alert(err.message);
+        setSelectedDealForPay(dealToComplete);
+        setDealToComplete(null);
+      } else {
+        alert(err.message || 'Error completing deal');
+      }
+    } finally {
+      setCompleting(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) return <LoadingSpinner />;
+
+  const isPending = tutorProfile?.verificationStatus === 'pending' || tutorProfile?.verificationStatus === 'under_review';
+  const isContactNeeded = tutorProfile?.verificationStatus === 'contact_needed';
+
+  const activeTrialDeals = deals.filter(d => d.status === 'active_trial');
+  const activePaidDeals = deals.filter(d => d.status === 'active_paid');
+
+  return (
+    <div className="py-6 md:py-8 pb-24 md:pb-12 bg-[#faf8f5] min-h-screen text-stone-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+        
+        {/* Account Status / Warning Notice / Audit Banner */}
+        <AccountStatusBanner user={user} role="tutor" />
+
+        {/* Feedback / Alert Banner */}
+        {feedback && (
+          <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-bold border ${
+            feedback.type === 'success'
+              ? 'bg-[#f0ece1] border-[#d4a359]/40 text-[#0c2217]'
+              : 'bg-[#fdf2f0] border-[#f5d6cf] text-[#b85d34]'
+          }`}>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#d4a359] shrink-0" />
+              <span>{feedback.message}</span>
+            </div>
+            <button
+              onClick={() => setFeedback(null)}
+              className="p-1 hover:bg-black/5 rounded-lg transition-colors cursor-pointer"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
+        {/* Verification Status Banner */}
+        {isPending && (
+          <div className="p-5 bg-[#fdf6ec] border border-[#f2dfbe] rounded-3xl flex items-center justify-between gap-4 text-[#8a5b14] shadow-xs">
+            <div className="flex items-center gap-3">
+              <Clock className="w-6 h-6 text-[#b8863b] animate-spin" />
+              <div>
+                <h4 className="font-serif font-bold text-sm text-[#0c2217]">Account Status: Pending Admin Verification</h4>
+                <p className="text-xs text-stone-600">
+                  Your Sanad credentials have been submitted and are being reviewed by the IlmiDunya administrative team.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/tutor/profile"
+              className="px-4 py-2 bg-[#b8863b] text-white font-bold text-xs rounded-xl shadow-xs hover:bg-[#a5742e] whitespace-nowrap"
+            >
+              Review Sanad Documents
+            </Link>
+          </div>
+        )}
+
+        {isContactNeeded && (
+          <div className="p-5 bg-[#fdf2f0] border border-[#f5d6cf] rounded-3xl flex items-center justify-between gap-4 text-[#b85d34] shadow-xs">
+            <div className="flex items-center gap-3">
+              <AlertTriangle className="w-6 h-6 text-[#b85d34]" />
+              <div>
+                <h4 className="font-serif font-bold text-sm text-[#0c2217]">Clarification Required on Your Application</h4>
+                <p className="text-xs text-stone-600">
+                  Admin Note: {tutorProfile?.contactNotes || 'Please upload a clearer scan of your Sanad.'}
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/tutor/profile"
+              className="px-4 py-2 bg-[#b85d34] text-white font-bold text-xs rounded-xl shadow-xs hover:bg-[#a04e28]"
+            >
+              Update Credentials
+            </Link>
+          </div>
+        )}
+
+
+        {/* Course Studio Banner */}
+        <div className="bg-gradient-to-r from-[#0c2217] via-[#143d2b] to-[#0c2217] rounded-3xl p-6 sm:p-7 text-white border border-[#d4a359]/30 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#d4a359]/20 border border-[#d4a359]/40 flex items-center justify-center shrink-0">
+              <BookOpen className="w-6 h-6 text-[#d4a359]" />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#d4a359] bg-white/10 px-2.5 py-0.5 rounded border border-[#d4a359]/30">
+                COURSE STUDIO
+              </span>
+              <h3 className="text-lg font-serif font-bold text-white mt-1">Author &amp; Manage Your Curriculum Courses</h3>
+              <p className="text-xs text-stone-300">Add chapters, lessons, diagnostic tests, and homework assignments.</p>
+            </div>
+          </div>
+          <Link
+            href="/tutor/courses"
+            className="px-5 py-2.5 bg-[#d4a359] hover:bg-[#c39248] text-[#0c2217] font-bold text-xs rounded-xl shadow-sm flex items-center justify-center gap-2 shrink-0 hover:scale-105 transition-all cursor-pointer"
+          >
+            <span>Open Course Studio</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+
+        {/* 4 Stats Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-white p-5 rounded-3xl border border-[#e6dfd5] shadow-xs hover:border-[#d4a359]/50 transition-all">
+            <div className="p-2.5 bg-[#eef5f0] text-[#143d2b] w-fit rounded-2xl mb-3 border border-[#c3dfcb]">
+              <Users className="w-5 h-5" />
+            </div>
+            <p className="text-2xl sm:text-3xl font-serif font-bold text-[#0c2217]">{deals.length}</p>
+            <p className="text-[11px] text-stone-500 uppercase font-bold tracking-wider mt-0.5">Total Student Deals</p>
+          </div>
+
+          <div className="bg-white p-5 rounded-3xl border border-[#e6dfd5] shadow-xs hover:border-[#d4a359]/50 transition-all">
+            <div className="p-2.5 bg-[#fdf6ec] text-[#b8863b] w-fit rounded-2xl mb-3 border border-[#f2dfbe]">
+              <Clock className="w-5 h-5" />
+            </div>
+            <p className="text-2xl sm:text-3xl font-serif font-bold text-[#b8863b]">{activeTrialDeals.length}</p>
+            <p className="text-[11px] text-stone-500 uppercase font-bold tracking-wider mt-0.5">Active Trials</p>
+          </div>
+
+          <div className="bg-white p-5 rounded-3xl border border-[#e6dfd5] shadow-xs hover:border-[#d4a359]/50 transition-all">
+            <div className="p-2.5 bg-[#eef3fb] text-[#2563eb] w-fit rounded-2xl mb-3 border border-[#dbe6fa]">
+              <CreditCard className="w-5 h-5" />
+            </div>
+            <p className="text-2xl sm:text-3xl font-serif font-bold text-[#2563eb]">{activePaidDeals.length}</p>
+            <p className="text-[11px] text-stone-500 uppercase font-bold tracking-wider mt-0.5">Paid Subscriptions</p>
+          </div>
+
+          <div className="bg-white p-5 rounded-3xl border border-[#e6dfd5] shadow-xs hover:border-[#d4a359]/50 transition-all">
+            <div className="p-2.5 bg-[#f5eff9] text-[#7c3aed] w-fit rounded-2xl mb-3 border border-[#e2d4f2]">
+              <Video className="w-5 h-5" />
+            </div>
+            <p className="text-2xl sm:text-3xl font-serif font-bold text-[#7c3aed]">{sessions.length}</p>
+            <p className="text-[11px] text-stone-500 uppercase font-bold tracking-wider mt-0.5">Classes Conducted</p>
+          </div>
+        </div>
+
+        {/* Ongoing Deals & Courses */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg sm:text-xl font-serif font-bold text-stone-900">Ongoing Student Course Deals</h2>
+              <p className="text-xs text-stone-500">Active agreements and 72-hour fee timers</p>
+            </div>
+            <Link href="/tutor/deals" className="text-xs font-bold text-[#143d2b] hover:text-[#0c2217] flex items-center gap-1 group">
+              <span>View All Deals</span>
+              <span className="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+            </Link>
+          </div>
+
+          {deals.length === 0 ? (
+            <div className="bg-white p-8 sm:p-12 rounded-3xl border border-[#e6dfd5] text-center text-xs text-stone-500 shadow-xs space-y-2">
+              <Users className="w-8 h-8 text-stone-300 mx-auto" />
+              <p>No active student deals yet. Message interested students to send your course deal offer.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-4">
+              {deals.map((deal) => (
+                <div key={deal._id} className="bg-white p-6 rounded-3xl border border-[#e6dfd5] shadow-xs space-y-4 hover:border-[#d4a359]/40 transition-all">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-3.5">
+                      <img
+                        src={deal.student?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(deal.student?.name || 'S')}&background=0c2217&color=faf8f5`}
+                        alt="Student"
+                        className="w-12 h-12 rounded-2xl object-cover border border-[#e6dfd5]"
+                      />
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="font-serif font-bold text-base text-stone-900">{deal.subject}</h3>
+                          {deal.status === 'completed' && (
+                            <span className="px-2.5 py-0.5 bg-[#eef5f0] text-[#143d2b] border border-[#c3dfcb] rounded-full text-[10px] font-bold uppercase tracking-wider">
+                              Completed &bull; Closed
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-stone-500 mt-0.5">
+                          Student: <strong className="text-stone-800">{deal.student?.name}</strong> ({deal.student?.city || 'Pakistan'}) &bull; PKR {deal.price?.toLocaleString()} / {deal.priceUnit === 'per_hour' ? 'hr' : 'mo'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {/* Join Live Classroom */}
+                      {deal.status !== 'completed' && deal.mode !== 'in_person' && deal.mode !== 'physical' && ['active_trial', 'continuation_agreed', 'active_paid'].includes(deal.status) && (deal.tutorFeePaid || !deal.tutorFeeDueDate || new Date(deal.tutorFeeDueDate) >= new Date() || (deal.trialEndDate && new Date(deal.trialEndDate) >= new Date())) && (
+                        <Link
+                          href={`/classroom/${[user?.id || user?._id, deal.student?._id].sort().join('_')}`}
+                          className="px-3.5 py-2 rounded-xl bg-[#0c2217] hover:bg-[#143d2b] text-[#faf8f5] text-xs font-bold flex items-center gap-1.5 shadow-xs border border-[#d4a359]/30 transition-all cursor-pointer"
+                        >
+                          <Video className="w-4 h-4 text-[#d4a359]" />
+                          <span>Join Live Class</span>
+                        </Link>
+                      )}
+
+                      {deal.status !== 'completed' && (
+                        <Link
+                          href={`/tutor/messages?conversation=${[user?.id || user?._id, deal.student?._id].sort().join('_')}`}
+                          className="px-3.5 py-2 rounded-xl bg-[#faf8f5] hover:bg-[#f3ede2] text-stone-700 text-xs font-semibold flex items-center gap-1.5 border border-[#e6dfd5] cursor-pointer"
+                        >
+                          <MessageSquare className="w-4 h-4 text-[#143d2b]" />
+                          <span>Chat</span>
+                        </Link>
+                      )}
+
+                      {/* Mark Completed Button & Clearance Status */}
+                      {deal.status !== 'completed' && deal.status !== 'cancelled' && (() => {
+                        const isCleared = Boolean(deal.tutorFeePaid || deal.paymentStatus === 'verified' || deal.platformFee === 0);
+                        return (
+                          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap sm:flex-nowrap">
+                            {isCleared ? (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold shadow-2xs">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                <span>Payment Verified</span>
+                              </span>
+                            ) : deal.paymentStatus === 'submitted_proof' ? (
+                              <button
+                                type="button"
+                                onClick={() => setSelectedDealForPay(deal)}
+                                className="px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                                title="Payment proof submitted • Under review by admin (Click to view or update)"
+                              >
+                                <Clock className="w-3.5 h-3.5 text-amber-600 animate-pulse shrink-0" />
+                                <span>Proof Under Review</span>
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => setSelectedDealForPay(deal)}
+                                className="px-2.5 py-1.5 rounded-xl bg-[#0c2217] hover:bg-[#143d2b] text-white text-xs font-bold flex items-center gap-1.5 border border-[#d4a359]/30 transition-all cursor-pointer shadow-2xs"
+                                title="Submit platform fee payment proof"
+                              >
+                                <CreditCard className="w-3.5 h-3.5 text-[#d4a359] shrink-0" />
+                                <span>Pay Platform Fee</span>
+                              </button>
+                            )}
+
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (!isCleared) {
+                                  alert(
+                                    deal.paymentStatus === 'submitted_proof'
+                                      ? 'Notice: Your platform payment proof has been submitted and is currently under review by administration. You can mark this deal as completed once admin verifies the payment.'
+                                      : 'Notice: Platform Payment Required!\n\nYou cannot mark this deal as completed until the platform fee has been cleared. Please submit your payment proof first.'
+                                  );
+                                  setSelectedDealForPay(deal);
+                                  return;
+                                }
+                                setDealToComplete(deal);
+                              }}
+                              className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer hover:scale-[1.02] ${
+                                isCleared
+                                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm ring-1 ring-emerald-400/30'
+                                  : 'bg-stone-100 hover:bg-amber-50 text-stone-400 border border-stone-200'
+                              }`}
+                              title={isCleared ? 'Mark deal completed and clear chat messages to save storage' : 'Platform payment clearance required before completing deal'}
+                            >
+                              <CheckCircle2 className={`w-3.5 h-3.5 ${isCleared ? 'text-white' : 'text-stone-400'}`} />
+                              <span>Mark Completed</span>
+                            </button>
+                          </div>
+                        );
+                      })()}
+
+                      {deal.status === 'completed' && (
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {deal.isTutorReviewed ? (
+                            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold shrink-0">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>Reviewed Student ★★★★★</span>
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => setReviewModalDeal(deal)}
+                              className="px-3.5 py-1.5 bg-[#d4a359] hover:bg-[#c39248] text-[#0c2217] font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                            >
+                              <Star className="w-3.5 h-3.5 fill-[#0c2217] text-[#0c2217]" />
+                              <span>Rate Student</span>
+                            </button>
+                          )}
+                          <Link
+                            href={`/tutor/messages?conversation=${[user?.id || user?._id, deal.student?._id].sort().join('_')}`}
+                            className="px-3 py-1.5 bg-[#faf8f5] hover:bg-[#f3ede2] text-stone-700 text-xs font-semibold flex items-center gap-1.5 border border-[#e6dfd5] rounded-xl cursor-pointer"
+                          >
+                            <MessageSquare className="w-3.5 h-3.5 text-[#143d2b]" />
+                            <span>Chat</span>
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {deal.status !== 'completed' ? (
+                    <Tutor72HourClock
+                      deal={deal}
+                      onPayClick={() => setSelectedDealForPay(deal)}
+                    />
+                  ) : (
+                    <div className="p-4 bg-[#f0ece1] border border-[#d4a359]/40 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-[#0c2217]">
+                      <div className="space-y-1">
+                        <span className="font-bold flex items-center gap-1.5 text-[#0c2217]">
+                          <CheckCircle2 className="w-4 h-4 text-[#d4a359]" />
+                          <span>Course Completed Successfully</span>
+                        </span>
+                        <p className="text-[11px] text-stone-600">
+                          Tutoring sessions have concluded. Both you and your student can exchange verified reviews to build mutual reputation.
+                        </p>
+                        {(deal.isStudentReviewed || deal.isReviewed) && (deal.studentReview?.comment || deal.review?.comment) && (
+                          <div className="pt-1.5 border-t border-[#d4a359]/20 text-[11px] flex items-center justify-between gap-2">
+                            <div>
+                              <span className="font-bold text-[#0c2217]">Student Review: </span>
+                              <span className="italic text-stone-700">&ldquo;{deal.studentReview?.comment || deal.review?.comment}&rdquo;</span>
+                            </div>
+                            {(() => {
+                              const rev = deal.studentReview || deal.review;
+                              const isReported = rev?.isReported || (rev?._id && reportedReviewIds.has(rev._id));
+                              return (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedReviewToReport(rev);
+                                    setReportModalOpen(true);
+                                  }}
+                                  disabled={isReported}
+                                  className={`inline-flex items-center gap-1 text-[10px] font-semibold transition-colors cursor-pointer shrink-0 ${
+                                    isReported
+                                      ? 'text-amber-600 cursor-default'
+                                      : 'text-slate-400 hover:text-rose-600'
+                                  }`}
+                                  title={isReported ? 'Under Admin Review' : 'Report this review to administration'}
+                                >
+                                  <Flag className="w-3 h-3" />
+                                  <span>{isReported ? 'Under Admin Review' : 'Report'}</span>
+                                </button>
+                              );
+                            })()}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0 flex-wrap">
+                        {deal.isTutorReviewed ? (
+                          <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>Your Review Submitted ★★★★★</span>
+                          </span>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setReviewModalDeal(deal)}
+                            className="px-4 py-2 bg-[#d4a359] hover:bg-[#c39248] text-[#0c2217] font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                          >
+                            <Star className="w-3.5 h-3.5 fill-[#0c2217] text-[#0c2217]" />
+                            <span>Rate Student</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+      </div>
+
+      {/* Tutor Platform Fee Payment Proof Modal */}
+      {selectedDealForPay && (
+        <TutorPaymentModal
+          deal={selectedDealForPay}
+          isOpen={!!selectedDealForPay}
+          onClose={() => setSelectedDealForPay(null)}
+          onSuccess={fetchData}
+        />
+      )}
+
+      {/* Mark Deal Completed Confirmation Modal */}
+      {dealToComplete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#f0ece1] text-[#0c2217] border border-[#d4a359]/40 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-5 h-5 text-[#d4a359]" />
+                </div>
+                <div>
+                  <h3 className="font-black text-slate-900 text-base">Mark Deal as Completed</h3>
+                  <p className="text-xs text-slate-500">Course: {dealToComplete.subject}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDealToComplete(null)}
+                className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3 text-xs">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Student:</span>
+                  <strong className="text-slate-900">{dealToComplete.student?.name}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Subject:</span>
+                  <strong className="text-slate-900">{dealToComplete.subject}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Agreed Fee:</span>
+                  <strong className="text-[#0c2217] font-mono">PKR {dealToComplete.price?.toLocaleString()}</strong>
+                </div>
+              </div>
+
+              {/* Database Storage Notice Callout */}
+              <div className="p-4 bg-amber-50 border border-amber-300/80 rounded-2xl space-y-1.5 text-amber-950">
+                <div className="flex items-center gap-2 font-black text-amber-900 text-xs">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>Important: Chat Conversation Cleanup</span>
+                </div>
+                <p className="text-[11px] text-amber-800 leading-relaxed">
+                  Marking this deal as completed will close the course. To optimize database storage, <strong>all chat messages, audio recordings, and file attachments between you and this student will be permanently deleted</strong>.
+                </p>
+                <p className="text-[10.5px] text-amber-700">
+                  This action cannot be undone. Please ensure you have concluded your correspondence.
+                </p>
+              </div>
+
+              <form onSubmit={handleCompleteDeal} className="space-y-3 pt-1">
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1 text-[11px]">
+                    Completion Notes / Feedback (Optional)
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={completionNotes}
+                    onChange={(e) => setCompletionNotes(e.target.value)}
+                    placeholder="e.g. Student successfully completed Quran Tajweed syllabus..."
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#0c2217] text-xs resize-none"
+                  />
+                </div>
+
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => setDealToComplete(null)}
+                    disabled={completing}
+                    className="px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-100 cursor-pointer disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={completing}
+                    className="px-5 py-2.5 rounded-xl bg-[#b85d34] hover:bg-[#9e4e2a] text-white text-xs font-black flex items-center gap-1.5 shadow-md shadow-[#b85d34]/20 cursor-pointer disabled:opacity-50"
+                  >
+                    {completing ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Completing Deal &amp; Cleaning Storage...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Check className="w-3.5 h-3.5" />
+                        <span>Confirm &amp; Complete Deal</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Leave Review for Student Modal */}
+      {reviewModalDeal && (
+        <LeaveReviewModal
+          isOpen={!!reviewModalDeal}
+          onClose={() => setReviewModalDeal(null)}
+          deal={reviewModalDeal}
+          student={reviewModalDeal.student}
+          tutor={user}
+          targetRole="student"
+          onSuccess={() => {
+            fetchData();
+          }}
+        />
+      )}
+
+      {/* Report Review Modal */}
+      <ReportReviewModal
+        review={selectedReviewToReport}
+        isOpen={reportModalOpen}
+        onClose={() => setReportModalOpen(false)}
+        onSuccess={(revId) => {
+          setReportedReviewIds((prev) => new Set([...prev, revId]));
+        }}
+      />
+    </div>
+  );
+}
+
